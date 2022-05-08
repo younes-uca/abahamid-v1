@@ -1,0 +1,57 @@
+
+<p-dialog [(visible)]="viewDossierMedicaleTagDialog" [style]="{width: '70vw'}"
+        header="Dossier medicale tag" [modal]="true"
+        styleClass="p-fluid">
+
+    <ng-template pTemplate="content">
+        <p-tabView>
+            <p-tabPanel header="Dossier medicale tag">
+                <div class="p-grid">
+
+                                <div class="p-field p-col-12 p-md-6">
+                                    <label for="1">Tag</label>
+                                    <p-dropdown [options]="tags" [(ngModel)]="selectedDossierMedicaleTag.tagVo"
+                                            id="1" [filter]="true" filterMatchMode="contains"
+                                            [showClear]="true" [disabled]="true"
+                                            optionLabel="reference"
+                                            placeholder="Tag">
+                                    </p-dropdown>
+                                </div>
+
+
+                                <div class="p-field p-col-12 p-md-6">
+                                    <label for="2">Dossier medicale</label>
+                                    <p-dropdown [options]="dossierMedicales" [(ngModel)]="selectedDossierMedicaleTag.dossierMedicaleVo"
+                                            id="2" [filter]="true" filterMatchMode="contains"
+                                            [showClear]="true" [disabled]="true"
+                                            optionLabel="ref"
+                                            placeholder="Dossier medicale">
+                                    </p-dropdown>
+                                </div>
+
+
+                </div>
+            </p-tabPanel>
+
+        </p-tabView>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer" >
+        <div class="p-grid">
+            <div>
+                <button pButton pRipple label="Annuler" icon="pi pi-times"
+                        class="p-button-text" (click)="hideViewDialog()"></button>
+            </div>
+        </div>
+    </ng-template>
+
+            <app-tag-create-chercheur></app-tag-create-chercheur>
+            <app-dossier-medicale-create-chercheur></app-dossier-medicale-create-chercheur>
+
+
+
+</p-dialog>
+
+
+

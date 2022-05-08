@@ -1,0 +1,98 @@
+        <p-dialog [(visible)]="createCliniqueDialog" [style]="{width: '70vw'}"
+                header="Clinique" [modal]="true"
+                styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
+
+
+            <ng-template pTemplate="content" >
+                <p-tabView>
+                    <p-tabPanel header="Clinique">
+                        <div class="p-grid">
+
+                                        <div class="p-field p-col-12 p-md-4">
+                                            <label for="1">Date clinique<span style="color: red;">*</span></label>
+                                            <p-calendar id="1"
+                                                        placeholder="Date clinique"  [(ngModel)]="selectedClinique.dateClinique"
+                                                    dateFormat="{{dateFormat}}" [ngClass]="{'ng-invalid ng-dirty' : !validCliniqueDateClinique}"  >
+                                            </p-calendar>
+                                            <small class='p-error' *ngIf='!validCliniqueDateClinique'>DateClinique est obligatoire.</small>
+                                        </div>
+
+                                        <div class="p-field p-col-12 p-md-4">
+                                            <label for="2">Antecedents personnels</label>
+                                            <textarea id="2" pInputTextarea rows="5" cols="30"
+                                                      placeholder="Antecedents personnels"  [(ngModel)]="selectedClinique.antecedentsPersonnels"
+                                             ></textarea>
+                                            
+                                        </div>
+
+                                        <div class="p-field p-col-12 p-md-4">
+                                            <label for="3">Antecedents familiaux</label>
+                                            <textarea id="3" pInputTextarea rows="5" cols="30"
+                                                      placeholder="Antecedents familiaux"  [(ngModel)]="selectedClinique.antecedentsFamiliaux"
+                                             ></textarea>
+                                            
+                                        </div>
+
+                                        <div class="p-field p-col-12 p-md-4">
+                                            <label for="4">Histoire maladie<span style="color: red;">*</span></label>
+                                            <textarea id="4" pInputTextarea rows="5" cols="30"
+                                                      placeholder="Histoire maladie"  [(ngModel)]="selectedClinique.histoireMaladie"
+                                            [ngClass]="{'ng-invalid ng-dirty' : !validCliniqueHistoireMaladie}"  ></textarea>
+                                            <small class='p-error' *ngIf='!validCliniqueHistoireMaladie'>HistoireMaladie est obligatoire.</small>
+                                        </div>
+
+                                        <div class="p-field p-col-12 p-md-4">
+                                            <label for="5">Examen clinique</label>
+                                            <textarea id="5" pInputTextarea rows="5" cols="30"
+                                                      placeholder="Examen clinique"  [(ngModel)]="selectedClinique.examenClinique"
+                                             ></textarea>
+                                            
+                                        </div>
+
+                                        <div class="p-field p-col-12 p-md-4">
+                                            <label for="6">Conclusion clinique</label>
+                                            <textarea id="6" pInputTextarea rows="5" cols="30"
+                                                      placeholder="Conclusion clinique"  [(ngModel)]="selectedClinique.conclusionClinique"
+                                             ></textarea>
+                                            
+                                        </div>
+
+                                        <div class="p-field p-col-11 p-md-3">
+                                            <label for="7">Dossier medicale<span style="color: red;">*</span></label>
+                                            <p-dropdown [options]="dossierMedicales" [(ngModel)]="selectedClinique.dossierMedicaleVo"
+                                                    id="7" [filter]="true" filterMatchMode="contains"
+                                                    [showClear]="true"
+                                                    optionLabel="ref"
+                                                    placeholder="Dossier medicale" [ngClass]="{'ng-invalid ng-dirty' : !validCliniqueDossierMedicale}"  >
+                                            </p-dropdown>
+                                            <small class='p-error' *ngIf='!validCliniqueDossierMedicale'>DossierMedicale est obligatoire.</small>
+                                        </div>
+                                        <div class="p-col-1">
+                                            <label></label>
+                                            <button pButton pRipple type="button"
+                                                    icon="pi pi-plus"   (click)="openCreatedossierMedicale('dossierMedicale')"
+                                                    class="p-button-success one-colonne-btn-success-align"></button>
+                                        </div>
+                        </div>
+                    </p-tabPanel>
+
+                </p-tabView>
+
+            </ng-template>
+
+            <ng-template pTemplate="footer" >
+                <div class="p-grid">
+                        <div>
+                            <button pButton pRipple label="Annuler" icon="pi pi-times"
+                                    class="p-button-text" (click)="hideCreateDialog()"></button>
+                        </div>
+                    <div>
+                        <button pButton pRipple label="Valider" icon="pi pi-check" style="margin:10px" (click)="save()"></button>
+                    </div>
+                </div>
+            </ng-template>
+
+                    <app-dossier-medicale-create-medecin></app-dossier-medicale-create-medecin>
+
+
+    </p-dialog>

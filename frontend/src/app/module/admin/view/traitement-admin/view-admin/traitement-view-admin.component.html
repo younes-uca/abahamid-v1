@@ -1,0 +1,100 @@
+
+<p-dialog [(visible)]="viewTraitementDialog" [style]="{width: '70vw'}"
+        header="Traitement" [modal]="true"
+        styleClass="p-fluid">
+
+    <ng-template pTemplate="content">
+        <p-tabView>
+            <p-tabPanel header="Traitement">
+                <div class="p-grid">
+
+                                <div class="p-field p-col-12 p-md-6">
+                                    <label for="1">Recueil de donnes</label>
+                                    <p-dropdown [options]="recueilDeDonness" [(ngModel)]="selectedTraitement.recueilDeDonnesVo"
+                                            id="1" [filter]="true" filterMatchMode="contains"
+                                            [showClear]="true" [disabled]="true"
+                                            optionLabel="traitementRef"
+                                            placeholder="Recueil de donnes">
+                                    </p-dropdown>
+                                </div>
+
+
+                                <div class="p-field p-col-12 p-md-6">
+                                    <label for="3">Image ordonnance</label>
+                                    <input class="p-mb-2 p-mr-2" type="text" pInputText [disabled]="true"
+                                           placeholder="Image ordonnance"  [(ngModel)]="selectedTraitement.imageOrdonnance"
+                                           id="3" [(ngModel)]="selectedTraitement.imageOrdonnance"
+                                           autofocus>
+                                </div>
+
+
+
+                                <div class="p-field p-col-12 p-md-6">
+                                    <label for="4">Dossier medicale ref</label>
+                                    <input class="p-mb-2 p-mr-2" type="text" pInputText [disabled]="true"
+                                           placeholder="Dossier medicale ref"  [(ngModel)]="selectedTraitement.dossierMedicaleRef"
+                                           id="4" [(ngModel)]="selectedTraitement.dossierMedicaleRef"
+                                           autofocus>
+                                </div>
+
+
+
+                </div>
+            </p-tabPanel>
+                    <p-tabPanel header="Soins">
+                        <div class="p-grid">
+
+                            <div class="p-col">
+                                <div class="card">
+                                    <p-table [value]="selectedTraitement.soinsVo" [scrollable]="true"
+                                            scrollHeight="200px">
+                                        <ng-template pTemplate="header">
+                                            <tr>
+                                                            <th>Date soin</th>
+                                                            <th>Infirmier</th>
+                                                            <th>Soins prod</th>
+                                                            <th>Consigne</th>
+                                            </tr>
+                                        </ng-template>
+                                        <ng-template pTemplate="body" let-p>
+                                            <tr>
+                                                            <td>{{p.dateSoin | date: dateFormatColumn}}</td>
+
+                                                        <td>{{p.infirmierVo?.ref}}</td>
+                                                            <td>{{p.soinsProd}}</td>
+
+                                                            <td>{{p.consigne}}</td>
+
+
+                                            </tr>
+                                        </ng-template>
+                                    </p-table>
+                                </div>
+                            </div>
+                        </div>
+
+                    </p-tabPanel>
+
+
+        </p-tabView>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer" >
+        <div class="p-grid">
+            <div>
+                <button pButton pRipple label="Annuler" icon="pi pi-times"
+                        class="p-button-text" (click)="hideViewDialog()"></button>
+            </div>
+        </div>
+    </ng-template>
+
+            <app-recueil-de-donnes-create-admin></app-recueil-de-donnes-create-admin>
+
+                    <app-infirmier-create-admin></app-infirmier-create-admin>
+
+
+</p-dialog>
+
+
+

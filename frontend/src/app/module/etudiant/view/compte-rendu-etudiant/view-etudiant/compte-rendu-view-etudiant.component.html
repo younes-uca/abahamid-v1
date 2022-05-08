@@ -1,0 +1,59 @@
+
+<p-dialog [(visible)]="viewCompteRenduDialog" [style]="{width: '70vw'}"
+        header="Compte rendu" [modal]="true"
+        styleClass="p-fluid">
+
+    <ng-template pTemplate="content">
+        <p-tabView>
+            <p-tabPanel header="Compte rendu">
+                <div class="p-grid">
+
+                                <div class="p-field p-col-12 p-md-6">
+                                    <label for="1">Date compte r</label>
+                                    <p-calendar id="1" [disabled]="true"
+                                                placeholder="Date compte r"  [(ngModel)]="selectedCompteRendu.dateCompteR"
+                                            dateFormat="{{dateFormat}}"></p-calendar>
+                                </div>
+
+                                <div class="p-field p-col-12 p-md-6">
+                                    <label for="2">Compte r</label>
+                                    <textarea id="2" pInputTextarea rows="5" cols="30"
+                                              placeholder="Compte r"  [(ngModel)]="selectedCompteRendu.compteR"
+                                    ></textarea>
+                                </div>
+
+                                <div class="p-field p-col-12 p-md-6">
+                                    <label for="3">Dossier medicale</label>
+                                    <p-dropdown [options]="dossierMedicales" [(ngModel)]="selectedCompteRendu.dossierMedicaleVo"
+                                            id="3" [filter]="true" filterMatchMode="contains"
+                                            [showClear]="true" [disabled]="true"
+                                            optionLabel="ref"
+                                            placeholder="Dossier medicale">
+                                    </p-dropdown>
+                                </div>
+
+
+                </div>
+            </p-tabPanel>
+
+        </p-tabView>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer" >
+        <div class="p-grid">
+            <div>
+                <button pButton pRipple label="Annuler" icon="pi pi-times"
+                        class="p-button-text" (click)="hideViewDialog()"></button>
+            </div>
+        </div>
+    </ng-template>
+
+            <app-dossier-medicale-create-etudiant></app-dossier-medicale-create-etudiant>
+
+
+
+</p-dialog>
+
+
+

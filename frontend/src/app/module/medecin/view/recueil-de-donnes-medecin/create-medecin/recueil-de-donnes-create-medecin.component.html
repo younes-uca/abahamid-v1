@@ -1,0 +1,131 @@
+        <p-dialog [(visible)]="createRecueilDeDonnesDialog" [style]="{width: '70vw'}"
+                header="Recueil de donnes" [modal]="true"
+                styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
+
+
+            <ng-template pTemplate="content" >
+                <p-tabView>
+                    <p-tabPanel header="Recueil de donnes">
+                        <div class="p-grid">
+
+                                        <div class="p-field p-col-12 p-md-4">
+                                            <label for="1">Allergie<span style="color: red;">*</span></label>
+                                            <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                   placeholder="Allergie"
+                                                   id="1" [(ngModel)]="selectedRecueilDeDonnes.allergie"
+                                                    [ngClass]="{'ng-invalid ng-dirty' : !validRecueilDeDonnesAllergie}"  />
+                                            <small class='p-error' *ngIf='!validRecueilDeDonnesAllergie'>Allergie est obligatoire.</small>
+                                        </div>
+
+
+
+                                        <div class="p-field p-col-12 p-md-4">
+                                            <label for="2">Etat psy<span style="color: red;">*</span></label>
+                                            <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                   placeholder="Etat psy"
+                                                   id="2" [(ngModel)]="selectedRecueilDeDonnes.etatPsy"
+                                                    [ngClass]="{'ng-invalid ng-dirty' : !validRecueilDeDonnesEtatPsy}"  />
+                                            <small class='p-error' *ngIf='!validRecueilDeDonnesEtatPsy'>EtatPsy est obligatoire.</small>
+                                        </div>
+
+
+
+                                        <div class="p-field p-col-12 p-md-4">
+                                            <label for="3">Respiration<span style="color: red;">*</span></label>
+                                            <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                   placeholder="Respiration"
+                                                   id="3" [(ngModel)]="selectedRecueilDeDonnes.respiration"
+                                                    [ngClass]="{'ng-invalid ng-dirty' : !validRecueilDeDonnesRespiration}"  />
+                                            <small class='p-error' *ngIf='!validRecueilDeDonnesRespiration'>Respiration est obligatoire.</small>
+                                        </div>
+
+
+
+                                        <div class="p-field p-col-12 p-md-4">
+                                            <label for="4">Alimentation<span style="color: red;">*</span></label>
+                                            <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                   placeholder="Alimentation"
+                                                   id="4" [(ngModel)]="selectedRecueilDeDonnes.alimentation"
+                                                    [ngClass]="{'ng-invalid ng-dirty' : !validRecueilDeDonnesAlimentation}"  />
+                                            <small class='p-error' *ngIf='!validRecueilDeDonnesAlimentation'>Alimentation est obligatoire.</small>
+                                        </div>
+
+
+
+                                        <div class="p-field p-col-12 p-md-4">
+                                            <label for="5">Mouvement<span style="color: red;">*</span></label>
+                                            <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                   placeholder="Mouvement"
+                                                   id="5" [(ngModel)]="selectedRecueilDeDonnes.mouvement"
+                                                    [ngClass]="{'ng-invalid ng-dirty' : !validRecueilDeDonnesMouvement}"  />
+                                            <small class='p-error' *ngIf='!validRecueilDeDonnesMouvement'>Mouvement est obligatoire.</small>
+                                        </div>
+
+
+
+                                        <div class="p-field p-col-12 p-md-4">
+                                            <label for="6">Sommeil<span style="color: red;">*</span></label>
+                                            <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                   placeholder="Sommeil"
+                                                   id="6" [(ngModel)]="selectedRecueilDeDonnes.sommeil"
+                                                    [ngClass]="{'ng-invalid ng-dirty' : !validRecueilDeDonnesSommeil}"  />
+                                            <small class='p-error' *ngIf='!validRecueilDeDonnesSommeil'>Sommeil est obligatoire.</small>
+                                        </div>
+
+
+
+                                        <div class="p-field p-col-12 p-md-4">
+                                            <label for="7">Regulation<span style="color: red;">*</span></label>
+                                            <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                   placeholder="Regulation"
+                                                   id="7" [(ngModel)]="selectedRecueilDeDonnes.regulation"
+                                                    [ngClass]="{'ng-invalid ng-dirty' : !validRecueilDeDonnesRegulation}"  />
+                                            <small class='p-error' *ngIf='!validRecueilDeDonnesRegulation'>Regulation est obligatoire.</small>
+                                        </div>
+
+
+
+                                        <div class="p-field p-col-12 p-md-4">
+                                            <label for="8">Autre</label>
+                                            <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                   placeholder="Autre"
+                                                   id="8" [(ngModel)]="selectedRecueilDeDonnes.autre"
+                                                     />
+                                            
+                                        </div>
+
+
+
+                                        <div class="p-field p-col-12 p-md-4">
+                                            <label for="9">Traitement ref<span style="color: red;">*</span></label>
+                                            <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                   placeholder="Traitement ref"
+                                                   id="9" [(ngModel)]="selectedRecueilDeDonnes.traitementRef"
+                                                    [ngClass]="{'ng-invalid ng-dirty' : !validRecueilDeDonnesTraitementRef}"  />
+                                            <small class='p-error' *ngIf='!validRecueilDeDonnesTraitementRef'>TraitementRef est obligatoire.</small>
+                                        </div>
+
+
+
+                        </div>
+                    </p-tabPanel>
+
+                </p-tabView>
+
+            </ng-template>
+
+            <ng-template pTemplate="footer" >
+                <div class="p-grid">
+                        <div>
+                            <button pButton pRipple label="Annuler" icon="pi pi-times"
+                                    class="p-button-text" (click)="hideCreateDialog()"></button>
+                        </div>
+                    <div>
+                        <button pButton pRipple label="Valider" icon="pi pi-check" style="margin:10px" (click)="save()"></button>
+                    </div>
+                </div>
+            </ng-template>
+
+
+
+    </p-dialog>

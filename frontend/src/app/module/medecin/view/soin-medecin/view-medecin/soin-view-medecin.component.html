@@ -1,0 +1,84 @@
+
+<p-dialog [(visible)]="viewSoinDialog" [style]="{width: '70vw'}"
+        header="Soin" [modal]="true"
+        styleClass="p-fluid">
+
+    <ng-template pTemplate="content">
+        <p-tabView>
+            <p-tabPanel header="Soin">
+                <div class="p-grid">
+
+                                <div class="p-field p-col-12 p-md-6">
+                                    <label for="1">Date soin</label>
+                                    <p-calendar id="1" [disabled]="true"
+                                                placeholder="Date soin"  [(ngModel)]="selectedSoin.dateSoin"
+                                            dateFormat="{{dateFormat}}"></p-calendar>
+                                </div>
+
+                                <div class="p-field p-col-12 p-md-6">
+                                    <label for="2">Infirmier</label>
+                                    <p-dropdown [options]="infirmiers" [(ngModel)]="selectedSoin.infirmierVo"
+                                            id="2" [filter]="true" filterMatchMode="contains"
+                                            [showClear]="true" [disabled]="true"
+                                            optionLabel="ref"
+                                            placeholder="Infirmier">
+                                    </p-dropdown>
+                                </div>
+
+
+                                <div class="p-field p-col-12 p-md-6">
+                                    <label for="3">Soins prod</label>
+                                    <input class="p-mb-2 p-mr-2" type="text" pInputText [disabled]="true"
+                                           placeholder="Soins prod"  [(ngModel)]="selectedSoin.soinsProd"
+                                           id="3" [(ngModel)]="selectedSoin.soinsProd"
+                                           autofocus>
+                                </div>
+
+
+
+                                <div class="p-field p-col-12 p-md-6">
+                                    <label for="4">Consigne</label>
+                                    <input class="p-mb-2 p-mr-2" type="text" pInputText [disabled]="true"
+                                           placeholder="Consigne"  [(ngModel)]="selectedSoin.consigne"
+                                           id="4" [(ngModel)]="selectedSoin.consigne"
+                                           autofocus>
+                                </div>
+
+
+
+                                <div class="p-field p-col-12 p-md-6">
+                                    <label for="5">Traitement</label>
+                                    <p-dropdown [options]="traitements" [(ngModel)]="selectedSoin.traitementVo"
+                                            id="5" [filter]="true" filterMatchMode="contains"
+                                            [showClear]="true" [disabled]="true"
+                                            optionLabel="dossierMedicaleRef"
+                                            placeholder="Traitement">
+                                    </p-dropdown>
+                                </div>
+
+
+                </div>
+            </p-tabPanel>
+
+        </p-tabView>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer" >
+        <div class="p-grid">
+            <div>
+                <button pButton pRipple label="Annuler" icon="pi pi-times"
+                        class="p-button-text" (click)="hideViewDialog()"></button>
+            </div>
+        </div>
+    </ng-template>
+
+            <app-infirmier-create-medecin></app-infirmier-create-medecin>
+            <app-traitement-create-medecin></app-traitement-create-medecin>
+
+
+
+</p-dialog>
+
+
+

@@ -1,0 +1,303 @@
+
+<p-dialog [(visible)]="viewDossierMedicaleDialog" [style]="{width: '70vw'}"
+        header="Dossier medicale" [modal]="true"
+        styleClass="p-fluid">
+
+    <ng-template pTemplate="content">
+        <p-tabView>
+            <p-tabPanel header="Dossier medicale">
+                <div class="p-grid">
+
+                                <div class="p-field p-col-12 p-md-6">
+                                    <label for="1">Ref</label>
+                                    <input class="p-mb-2 p-mr-2" type="text" pInputText [disabled]="true"
+                                           placeholder="Ref"  [(ngModel)]="selectedDossierMedicale.ref"
+                                           id="1" [(ngModel)]="selectedDossierMedicale.ref"
+                                           autofocus>
+                                </div>
+
+
+
+                                <div class="p-field p-col-12 p-md-6">
+                                    <label for="2">Patient</label>
+                                    <p-dropdown [options]="patients" [(ngModel)]="selectedDossierMedicale.patientVo"
+                                            id="2" [filter]="true" filterMatchMode="contains"
+                                            [showClear]="true" [disabled]="true"
+                                            optionLabel="cin"
+                                            placeholder="Patient">
+                                    </p-dropdown>
+                                </div>
+
+
+                                <div class="p-field p-col-12 p-md-6">
+                                    <label for="3">Patient contact</label>
+                                    <p-dropdown [options]="patientContacts" [(ngModel)]="selectedDossierMedicale.patientContactVo"
+                                            id="3" [filter]="true" filterMatchMode="contains"
+                                            [showClear]="true" [disabled]="true"
+                                            optionLabel="ref"
+                                            placeholder="Patient contact">
+                                    </p-dropdown>
+                                </div>
+
+
+                                <div class="p-field p-col-12 p-md-6">
+                                    <label for="9">Traitement</label>
+                                    <p-dropdown [options]="traitements" [(ngModel)]="selectedDossierMedicale.traitementVo"
+                                            id="9" [filter]="true" filterMatchMode="contains"
+                                            [showClear]="true" [disabled]="true"
+                                            optionLabel="dossierMedicaleRef"
+                                            placeholder="Traitement">
+                                    </p-dropdown>
+                                </div>
+
+
+                </div>
+            </p-tabPanel>
+                    <p-tabPanel header="Diagnostics">
+                        <div class="p-grid">
+
+                            <div class="p-col">
+                                <div class="card">
+                                    <p-table [value]="selectedDossierMedicale.diagnosticsVo" [scrollable]="true"
+                                            scrollHeight="200px">
+                                        <ng-template pTemplate="header">
+                                            <tr>
+                                                            <th>Date diagnostic</th>
+                                                            <th>Diag</th>
+                                            </tr>
+                                        </ng-template>
+                                        <ng-template pTemplate="body" let-p>
+                                            <tr>
+                                                            <td>{{p.dateDiagnostic | date: dateFormatColumn}}</td>
+
+                                                            <td>{{p.diag}}</td>
+
+
+                                            </tr>
+                                        </ng-template>
+                                    </p-table>
+                                </div>
+                            </div>
+                        </div>
+
+                    </p-tabPanel>
+
+                    <p-tabPanel header="Cliniques">
+                        <div class="p-grid">
+
+                            <div class="p-col">
+                                <div class="card">
+                                    <p-table [value]="selectedDossierMedicale.cliniquesVo" [scrollable]="true"
+                                            scrollHeight="200px">
+                                        <ng-template pTemplate="header">
+                                            <tr>
+                                                            <th>Date clinique</th>
+                                                            <th>Antecedents personnels</th>
+                                                            <th>Antecedents familiaux</th>
+                                                            <th>Histoire maladie</th>
+                                                            <th>Examen clinique</th>
+                                                            <th>Conclusion clinique</th>
+                                            </tr>
+                                        </ng-template>
+                                        <ng-template pTemplate="body" let-p>
+                                            <tr>
+                                                            <td>{{p.dateClinique | date: dateFormatColumn}}</td>
+
+                                                            <td>{{p.antecedentsPersonnels}}</td>
+
+                                                            <td>{{p.antecedentsFamiliaux}}</td>
+
+                                                            <td>{{p.histoireMaladie}}</td>
+
+                                                            <td>{{p.examenClinique}}</td>
+
+                                                            <td>{{p.conclusionClinique}}</td>
+
+
+                                            </tr>
+                                        </ng-template>
+                                    </p-table>
+                                </div>
+                            </div>
+                        </div>
+
+                    </p-tabPanel>
+
+                    <p-tabPanel header="Biologies">
+                        <div class="p-grid">
+
+                            <div class="p-col">
+                                <div class="card">
+                                    <p-table [value]="selectedDossierMedicale.biologiesVo" [scrollable]="true"
+                                            scrollHeight="200px">
+                                        <ng-template pTemplate="header">
+                                            <tr>
+                                                            <th>Date biologie</th>
+                                                            <th>Examen</th>
+                                                            <th>Resultat</th>
+                                            </tr>
+                                        </ng-template>
+                                        <ng-template pTemplate="body" let-p>
+                                            <tr>
+                                                            <td>{{p.dateBiologie | date: dateFormatColumn}}</td>
+
+                                                        <td>{{p.examenVo?.libelle}}</td>
+                                                            <td>{{p.resultat}}</td>
+
+
+                                            </tr>
+                                        </ng-template>
+                                    </p-table>
+                                </div>
+                            </div>
+                        </div>
+
+                    </p-tabPanel>
+
+                    <p-tabPanel header="Imageries">
+                        <div class="p-grid">
+
+                            <div class="p-col">
+                                <div class="card">
+                                    <p-table [value]="selectedDossierMedicale.imageriesVo" [scrollable]="true"
+                                            scrollHeight="200px">
+                                        <ng-template pTemplate="header">
+                                            <tr>
+                                                            <th>Date imagerie</th>
+                                                            <th>Type image</th>
+                                                            <th>Phase image</th>
+                                                            <th>Image scan</th>
+                                                            <th>Commanetaire</th>
+                                            </tr>
+                                        </ng-template>
+                                        <ng-template pTemplate="body" let-p>
+                                            <tr>
+                                                            <td>{{p.dateImagerie | date: dateFormatColumn}}</td>
+
+                                                        <td>{{p.typeImageVo?.libelle}}</td>
+                                                        <td>{{p.phaseImageVo?.libelle}}</td>
+                                                            <td>{{p.imageScan}}</td>
+
+                                                            <td>{{p.commanetaire}}</td>
+
+
+                                            </tr>
+                                        </ng-template>
+                                    </p-table>
+                                </div>
+                            </div>
+                        </div>
+
+                    </p-tabPanel>
+
+                    <p-tabPanel header="Compte rendus">
+                        <div class="p-grid">
+
+                            <div class="p-col">
+                                <div class="card">
+                                    <p-table [value]="selectedDossierMedicale.compteRendusVo" [scrollable]="true"
+                                            scrollHeight="200px">
+                                        <ng-template pTemplate="header">
+                                            <tr>
+                                                            <th>Date compte r</th>
+                                                            <th>Compte r</th>
+                                            </tr>
+                                        </ng-template>
+                                        <ng-template pTemplate="body" let-p>
+                                            <tr>
+                                                            <td>{{p.dateCompteR | date: dateFormatColumn}}</td>
+
+                                                            <td>{{p.compteR}}</td>
+
+
+                                            </tr>
+                                        </ng-template>
+                                    </p-table>
+                                </div>
+                            </div>
+                        </div>
+
+                    </p-tabPanel>
+
+                    <p-tabPanel header="Evo suivs">
+                        <div class="p-grid">
+
+                            <div class="p-col">
+                                <div class="card">
+                                    <p-table [value]="selectedDossierMedicale.evoSuivsVo" [scrollable]="true"
+                                            scrollHeight="200px">
+                                        <ng-template pTemplate="header">
+                                            <tr>
+                                                            <th>Date evo s</th>
+                                                            <th>Evo s</th>
+                                            </tr>
+                                        </ng-template>
+                                        <ng-template pTemplate="body" let-p>
+                                            <tr>
+                                                            <td>{{p.dateEvoS | date: dateFormatColumn}}</td>
+
+                                                            <td>{{p.evoS}}</td>
+
+
+                                            </tr>
+                                        </ng-template>
+                                    </p-table>
+                                </div>
+                            </div>
+                        </div>
+
+                    </p-tabPanel>
+
+                    <p-tabPanel header="Dossier medicale tags">
+                        <div class="p-grid">
+
+                            <div class="p-col">
+                                <div class="card">
+                                    <p-table [value]="selectedDossierMedicale.dossierMedicaleTagsVo" [scrollable]="true"
+                                            scrollHeight="200px">
+                                        <ng-template pTemplate="header">
+                                            <tr>
+                                                            <th>Tag</th>
+                                            </tr>
+                                        </ng-template>
+                                        <ng-template pTemplate="body" let-p>
+                                            <tr>
+                                                        <td>{{p.tagVo?.reference}}</td>
+
+                                            </tr>
+                                        </ng-template>
+                                    </p-table>
+                                </div>
+                            </div>
+                        </div>
+
+                    </p-tabPanel>
+
+
+        </p-tabView>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer" >
+        <div class="p-grid">
+            <div>
+                <button pButton pRipple label="Annuler" icon="pi pi-times"
+                        class="p-button-text" (click)="hideViewDialog()"></button>
+            </div>
+        </div>
+    </ng-template>
+
+            <app-patient-create-admin></app-patient-create-admin>
+            <app-patient-contact-create-admin></app-patient-contact-create-admin>
+            <app-traitement-create-admin></app-traitement-create-admin>
+
+                    <app-examen-create-admin></app-examen-create-admin>
+                    <app-type-image-create-admin></app-type-image-create-admin>
+                    <app-phase-image-create-admin></app-phase-image-create-admin>
+                    <app-tag-create-admin></app-tag-create-admin>
+
+
+</p-dialog>
+
+
+

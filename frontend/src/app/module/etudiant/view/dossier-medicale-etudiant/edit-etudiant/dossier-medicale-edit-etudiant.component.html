@@ -1,0 +1,591 @@
+
+        <p-dialog [(visible)]="editDossierMedicaleDialog" [style]="{width: '70vw'}"
+                header="Dossier medicale" [modal]="true"
+                styleClass="p-fluid">
+
+            <ng-template pTemplate="content">
+                <p-tabView>
+                    <p-tabPanel header="Dossier medicale">
+                        <div class="p-grid">
+
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <label for="1">Ref</label>
+                                            <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                   placeholder="Ref"
+                                                   id="1" [(ngModel)]="selectedDossierMedicale.ref"
+                                                   />
+                                        </div>
+
+
+
+                                        <div class="p-field p-col-12 p-md-5">
+                                            <label for="2">Patient</label>
+                                            <p-dropdown [options]="patients" [(ngModel)]="selectedDossierMedicale.patientVo"
+                                                    id="2" [filter]="true" filterMatchMode="contains"
+                                                    [showClear]="true"
+                                                    optionLabel="cin"
+                                                    placeholder="Patient">
+                                            </p-dropdown>
+                                        </div>
+                                        <div class="p-field p-col-12 p-md-1">
+                                            <label></label>
+                                            <button pButton pRipple type="button"
+                                                    icon="pi pi-plus"   (click)="openCreatepatient('patient')"
+                                                    class="p-button-success one-colonne-btn-success-align"></button>
+                                        </div>
+
+                                        <div class="p-field p-col-12 p-md-5">
+                                            <label for="3">Patient contact</label>
+                                            <p-dropdown [options]="patientContacts" [(ngModel)]="selectedDossierMedicale.patientContactVo"
+                                                    id="3" [filter]="true" filterMatchMode="contains"
+                                                    [showClear]="true"
+                                                    optionLabel="ref"
+                                                    placeholder="Patient contact">
+                                            </p-dropdown>
+                                        </div>
+                                        <div class="p-field p-col-12 p-md-1">
+                                            <label></label>
+                                            <button pButton pRipple type="button"
+                                                    icon="pi pi-plus"   (click)="openCreatepatientContact('patientContact')"
+                                                    class="p-button-success one-colonne-btn-success-align"></button>
+                                        </div>
+
+                                        <div class="p-field p-col-12 p-md-5">
+                                            <label for="9">Traitement</label>
+                                            <p-dropdown [options]="traitements" [(ngModel)]="selectedDossierMedicale.traitementVo"
+                                                    id="9" [filter]="true" filterMatchMode="contains"
+                                                    [showClear]="true"
+                                                    optionLabel="dossierMedicaleRef"
+                                                    placeholder="Traitement">
+                                            </p-dropdown>
+                                        </div>
+                                        <div class="p-field p-col-12 p-md-1">
+                                            <label></label>
+                                            <button pButton pRipple type="button"
+                                                    icon="pi pi-plus"   (click)="openCreatetraitement('traitement')"
+                                                    class="p-button-success one-colonne-btn-success-align"></button>
+                                        </div>
+
+                        </div>
+                    </p-tabPanel>
+                            <p-tabPanel header="Diagnostics">
+                                <div class="p-grid">
+                                    <div class="p-col">
+                                                <div class="p-field">
+                                                    <label for="1">Date diagnostic</label>
+                                                    <p-calendar id="1"
+                                                                placeholder="Date diagnostic"
+                                                            [(ngModel)]="selectedDiagnostics.dateDiagnostic"
+                                                            dateFormat="{{dateFormat}}" [showIcon]="true"></p-calendar>
+                                                </div>
+                                                <div class="p-field">
+                                                    <label for="2">Diag</label>
+                                                    <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                           placeholder="Diag"
+                                                           id="2" [(ngModel)]="selectedDiagnostics.diag"
+                                                           />
+                                                </div>
+
+                                        <button pButton pRipple type="button" icon="pi pi-plus" class="p-mt-4"
+                                                label="OK" (click)="addDiagnostics()"
+                                        ></button>
+                                    </div>
+                                    <div class="p-col">
+                                        <div class="card">
+                                            <p-table [value]="selectedDossierMedicale.diagnosticsVo" [scrollable]="true"
+                                                    scrollHeight="200px">
+                                                <ng-template pTemplate="header">
+                                                    <tr>
+                                                                    <th>Date diagnostic</th>
+                                                                    <th>Diag</th>
+                                                        <th>Actions</th>
+                                                    </tr>
+                                                </ng-template>
+                                                <ng-template pTemplate="body" let-p>
+                                                    <tr>
+                                                                    <td>{{p.dateDiagnostic | date: dateFormatColumn}}</td>
+
+                                                                    <td>{{p.diag}}</td>
+
+                                                        <td>
+                                                            <button (click)="deleteDiagnostics(p)" pButton type="button"
+                                                                                                                 icon="pi pi-times"  class="p-button-rounded p-button-danger">
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                </ng-template>
+                                            </p-table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </p-tabPanel>
+                            <p-tabPanel header="Cliniques">
+                                <div class="p-grid">
+                                    <div class="p-col">
+                                                <div class="p-field">
+                                                    <label for="1">Date clinique</label>
+                                                    <p-calendar id="1"
+                                                                placeholder="Date clinique"
+                                                            [(ngModel)]="selectedCliniques.dateClinique"
+                                                            dateFormat="{{dateFormat}}" [showIcon]="true"></p-calendar>
+                                                </div>
+                                                <div class="p-field">
+                                                    <label for="2">Antecedents personnels</label>
+                                                    <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                           placeholder="Antecedents personnels"
+                                                           id="2" [(ngModel)]="selectedCliniques.antecedentsPersonnels"
+                                                           />
+                                                </div>
+
+                                                <div class="p-field">
+                                                    <label for="3">Antecedents familiaux</label>
+                                                    <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                           placeholder="Antecedents familiaux"
+                                                           id="3" [(ngModel)]="selectedCliniques.antecedentsFamiliaux"
+                                                           />
+                                                </div>
+
+                                                <div class="p-field">
+                                                    <label for="4">Histoire maladie</label>
+                                                    <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                           placeholder="Histoire maladie"
+                                                           id="4" [(ngModel)]="selectedCliniques.histoireMaladie"
+                                                           />
+                                                </div>
+
+                                                <div class="p-field">
+                                                    <label for="5">Examen clinique</label>
+                                                    <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                           placeholder="Examen clinique"
+                                                           id="5" [(ngModel)]="selectedCliniques.examenClinique"
+                                                           />
+                                                </div>
+
+                                                <div class="p-field">
+                                                    <label for="6">Conclusion clinique</label>
+                                                    <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                           placeholder="Conclusion clinique"
+                                                           id="6" [(ngModel)]="selectedCliniques.conclusionClinique"
+                                                           />
+                                                </div>
+
+                                        <button pButton pRipple type="button" icon="pi pi-plus" class="p-mt-4"
+                                                label="OK" (click)="addCliniques()"
+                                        ></button>
+                                    </div>
+                                    <div class="p-col">
+                                        <div class="card">
+                                            <p-table [value]="selectedDossierMedicale.cliniquesVo" [scrollable]="true"
+                                                    scrollHeight="200px">
+                                                <ng-template pTemplate="header">
+                                                    <tr>
+                                                                    <th>Date clinique</th>
+                                                                    <th>Antecedents personnels</th>
+                                                                    <th>Antecedents familiaux</th>
+                                                                    <th>Histoire maladie</th>
+                                                                    <th>Examen clinique</th>
+                                                                    <th>Conclusion clinique</th>
+                                                        <th>Actions</th>
+                                                    </tr>
+                                                </ng-template>
+                                                <ng-template pTemplate="body" let-p>
+                                                    <tr>
+                                                                    <td>{{p.dateClinique | date: dateFormatColumn}}</td>
+
+                                                                    <td>{{p.antecedentsPersonnels}}</td>
+
+                                                                    <td>{{p.antecedentsFamiliaux}}</td>
+
+                                                                    <td>{{p.histoireMaladie}}</td>
+
+                                                                    <td>{{p.examenClinique}}</td>
+
+                                                                    <td>{{p.conclusionClinique}}</td>
+
+                                                        <td>
+                                                            <button (click)="deleteCliniques(p)" pButton type="button"
+                                                                                                                 icon="pi pi-times"  class="p-button-rounded p-button-danger">
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                </ng-template>
+                                            </p-table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </p-tabPanel>
+                            <p-tabPanel header="Biologies">
+                                <div class="p-grid">
+                                    <div class="p-col">
+                                                <div class="p-field">
+                                                    <label for="1">Date biologie</label>
+                                                    <p-calendar id="1"
+                                                                placeholder="Date biologie"
+                                                            [(ngModel)]="selectedBiologies.dateBiologie"
+                                                            dateFormat="{{dateFormat}}" [showIcon]="true"></p-calendar>
+                                                </div>
+                                                <div class="p-field">
+                                                    <label for="2">Resultat</label>
+                                                    <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                           placeholder="Resultat"
+                                                           id="2" [(ngModel)]="selectedBiologies.resultat"
+                                                           />
+                                                </div>
+
+                                                <div class="p-grid">
+                                                    <div class="p-col-11 p-field">
+                                                        <label>Examen</label>
+                                                        <p-dropdown [options]="examens" [(ngModel)]="selectedBiologies.examenVo"
+                                                                id="0"  [filter]="true"
+                                                                filterMatchMode="contains" [showClear]="true"
+                                                                optionLabel="libelle"
+                                                                placeholder="Examen"
+                                                        >
+                                                        </p-dropdown>
+
+                                                    </div>
+                                                    <div class="p-col-1">
+                                                        <label></label>
+                                                        <button pButton pRipple type="button"
+                                                                icon="pi pi-plus"   (click)="openCreateexamen('examen')"
+                                                                class="p-button-success one-colonne-btn-success-align"></button>
+                                                    </div>
+
+                                                </div>
+
+                                        <button pButton pRipple type="button" icon="pi pi-plus" class="p-mt-4"
+                                                label="OK" (click)="addBiologies()"
+                                        ></button>
+                                    </div>
+                                    <div class="p-col">
+                                        <div class="card">
+                                            <p-table [value]="selectedDossierMedicale.biologiesVo" [scrollable]="true"
+                                                    scrollHeight="200px">
+                                                <ng-template pTemplate="header">
+                                                    <tr>
+                                                                    <th>Date biologie</th>
+                                                                    <th>Examen</th>
+                                                                    <th>Resultat</th>
+                                                        <th>Actions</th>
+                                                    </tr>
+                                                </ng-template>
+                                                <ng-template pTemplate="body" let-p>
+                                                    <tr>
+                                                                    <td>{{p.dateBiologie | date: dateFormatColumn}}</td>
+
+                                                                <td>{{p.examenVo?.libelle}}</td>
+                                                                    <td>{{p.resultat}}</td>
+
+                                                        <td>
+                                                            <button (click)="deleteBiologies(p)" pButton type="button"
+                                                                                                                 icon="pi pi-times"  class="p-button-rounded p-button-danger">
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                </ng-template>
+                                            </p-table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </p-tabPanel>
+                            <p-tabPanel header="Imageries">
+                                <div class="p-grid">
+                                    <div class="p-col">
+                                                <div class="p-field">
+                                                    <label for="1">Date imagerie</label>
+                                                    <p-calendar id="1"
+                                                                placeholder="Date imagerie"
+                                                            [(ngModel)]="selectedImageries.dateImagerie"
+                                                            dateFormat="{{dateFormat}}" [showIcon]="true"></p-calendar>
+                                                </div>
+                                                <div class="p-field">
+                                                    <label for="2">Image scan</label>
+                                                    <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                           placeholder="Image scan"
+                                                           id="2" [(ngModel)]="selectedImageries.imageScan"
+                                                           />
+                                                </div>
+
+                                                <div class="p-field">
+                                                    <label for="3">Commanetaire</label>
+                                                    <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                           placeholder="Commanetaire"
+                                                           id="3" [(ngModel)]="selectedImageries.commanetaire"
+                                                           />
+                                                </div>
+
+                                                <div class="p-grid">
+                                                    <div class="p-col-11 p-field">
+                                                        <label>Type image</label>
+                                                        <p-dropdown [options]="typeImages" [(ngModel)]="selectedImageries.typeImageVo"
+                                                                id="0"  [filter]="true"
+                                                                filterMatchMode="contains" [showClear]="true"
+                                                                optionLabel="libelle"
+                                                                placeholder="Type image"
+                                                        >
+                                                        </p-dropdown>
+
+                                                    </div>
+                                                    <div class="p-col-1">
+                                                        <label></label>
+                                                        <button pButton pRipple type="button"
+                                                                icon="pi pi-plus"   (click)="openCreatetypeImage('typeImage')"
+                                                                class="p-button-success one-colonne-btn-success-align"></button>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="p-grid">
+                                                    <div class="p-col-11 p-field">
+                                                        <label>Phase image</label>
+                                                        <p-dropdown [options]="phaseImages" [(ngModel)]="selectedImageries.phaseImageVo"
+                                                                id="1"  [filter]="true"
+                                                                filterMatchMode="contains" [showClear]="true"
+                                                                optionLabel="libelle"
+                                                                placeholder="Phase image"
+                                                        >
+                                                        </p-dropdown>
+
+                                                    </div>
+                                                    <div class="p-col-1">
+                                                        <label></label>
+                                                        <button pButton pRipple type="button"
+                                                                icon="pi pi-plus"   (click)="openCreatephaseImage('phaseImage')"
+                                                                class="p-button-success one-colonne-btn-success-align"></button>
+                                                    </div>
+
+                                                </div>
+
+                                        <button pButton pRipple type="button" icon="pi pi-plus" class="p-mt-4"
+                                                label="OK" (click)="addImageries()"
+                                        ></button>
+                                    </div>
+                                    <div class="p-col">
+                                        <div class="card">
+                                            <p-table [value]="selectedDossierMedicale.imageriesVo" [scrollable]="true"
+                                                    scrollHeight="200px">
+                                                <ng-template pTemplate="header">
+                                                    <tr>
+                                                                    <th>Date imagerie</th>
+                                                                    <th>Type image</th>
+                                                                    <th>Phase image</th>
+                                                                    <th>Image scan</th>
+                                                                    <th>Commanetaire</th>
+                                                        <th>Actions</th>
+                                                    </tr>
+                                                </ng-template>
+                                                <ng-template pTemplate="body" let-p>
+                                                    <tr>
+                                                                    <td>{{p.dateImagerie | date: dateFormatColumn}}</td>
+
+                                                                <td>{{p.typeImageVo?.libelle}}</td>
+                                                                <td>{{p.phaseImageVo?.libelle}}</td>
+                                                                    <td>{{p.imageScan}}</td>
+
+                                                                    <td>{{p.commanetaire}}</td>
+
+                                                        <td>
+                                                            <button (click)="deleteImageries(p)" pButton type="button"
+                                                                                                                 icon="pi pi-times"  class="p-button-rounded p-button-danger">
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                </ng-template>
+                                            </p-table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </p-tabPanel>
+                            <p-tabPanel header="Compte rendus">
+                                <div class="p-grid">
+                                    <div class="p-col">
+                                                <div class="p-field">
+                                                    <label for="1">Date compte r</label>
+                                                    <p-calendar id="1"
+                                                                placeholder="Date compte r"
+                                                            [(ngModel)]="selectedCompteRendus.dateCompteR"
+                                                            dateFormat="{{dateFormat}}" [showIcon]="true"></p-calendar>
+                                                </div>
+                                                <div class="p-field">
+                                                    <label for="2">Compte r</label>
+                                                    <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                           placeholder="Compte r"
+                                                           id="2" [(ngModel)]="selectedCompteRendus.compteR"
+                                                           />
+                                                </div>
+
+                                        <button pButton pRipple type="button" icon="pi pi-plus" class="p-mt-4"
+                                                label="OK" (click)="addCompteRendus()"
+                                        ></button>
+                                    </div>
+                                    <div class="p-col">
+                                        <div class="card">
+                                            <p-table [value]="selectedDossierMedicale.compteRendusVo" [scrollable]="true"
+                                                    scrollHeight="200px">
+                                                <ng-template pTemplate="header">
+                                                    <tr>
+                                                                    <th>Date compte r</th>
+                                                                    <th>Compte r</th>
+                                                        <th>Actions</th>
+                                                    </tr>
+                                                </ng-template>
+                                                <ng-template pTemplate="body" let-p>
+                                                    <tr>
+                                                                    <td>{{p.dateCompteR | date: dateFormatColumn}}</td>
+
+                                                                    <td>{{p.compteR}}</td>
+
+                                                        <td>
+                                                            <button (click)="deleteCompteRendus(p)" pButton type="button"
+                                                                                                                 icon="pi pi-times"  class="p-button-rounded p-button-danger">
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                </ng-template>
+                                            </p-table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </p-tabPanel>
+                            <p-tabPanel header="Evo suivs">
+                                <div class="p-grid">
+                                    <div class="p-col">
+                                                <div class="p-field">
+                                                    <label for="1">Date evo s</label>
+                                                    <p-calendar id="1"
+                                                                placeholder="Date evo s"
+                                                            [(ngModel)]="selectedEvoSuivs.dateEvoS"
+                                                            dateFormat="{{dateFormat}}" [showIcon]="true"></p-calendar>
+                                                </div>
+                                                <div class="p-field">
+                                                    <label for="2">Evo s</label>
+                                                    <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                           placeholder="Evo s"
+                                                           id="2" [(ngModel)]="selectedEvoSuivs.evoS"
+                                                           />
+                                                </div>
+
+                                        <button pButton pRipple type="button" icon="pi pi-plus" class="p-mt-4"
+                                                label="OK" (click)="addEvoSuivs()"
+                                        ></button>
+                                    </div>
+                                    <div class="p-col">
+                                        <div class="card">
+                                            <p-table [value]="selectedDossierMedicale.evoSuivsVo" [scrollable]="true"
+                                                    scrollHeight="200px">
+                                                <ng-template pTemplate="header">
+                                                    <tr>
+                                                                    <th>Date evo s</th>
+                                                                    <th>Evo s</th>
+                                                        <th>Actions</th>
+                                                    </tr>
+                                                </ng-template>
+                                                <ng-template pTemplate="body" let-p>
+                                                    <tr>
+                                                                    <td>{{p.dateEvoS | date: dateFormatColumn}}</td>
+
+                                                                    <td>{{p.evoS}}</td>
+
+                                                        <td>
+                                                            <button (click)="deleteEvoSuivs(p)" pButton type="button"
+                                                                                                                 icon="pi pi-times"  class="p-button-rounded p-button-danger">
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                </ng-template>
+                                            </p-table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </p-tabPanel>
+                            <p-tabPanel header="Dossier medicale tags">
+                                <div class="p-grid">
+                                    <div class="p-col">
+                                                <div class="p-grid">
+                                                    <div class="p-col-11 p-field">
+                                                        <label>Tag</label>
+                                                        <p-dropdown [options]="tags" [(ngModel)]="selectedDossierMedicaleTags.tagVo"
+                                                                id="0"  [filter]="true"
+                                                                filterMatchMode="contains" [showClear]="true"
+                                                                optionLabel="reference"
+                                                                placeholder="Tag"
+                                                        >
+                                                        </p-dropdown>
+
+                                                    </div>
+                                                    <div class="p-col-1">
+                                                        <label></label>
+                                                        <button pButton pRipple type="button"
+                                                                icon="pi pi-plus"   (click)="openCreatetag('tag')"
+                                                                class="p-button-success one-colonne-btn-success-align"></button>
+                                                    </div>
+
+                                                </div>
+
+                                        <button pButton pRipple type="button" icon="pi pi-plus" class="p-mt-4"
+                                                label="OK" (click)="addDossierMedicaleTags()"
+                                        ></button>
+                                    </div>
+                                    <div class="p-col">
+                                        <div class="card">
+                                            <p-table [value]="selectedDossierMedicale.dossierMedicaleTagsVo" [scrollable]="true"
+                                                    scrollHeight="200px">
+                                                <ng-template pTemplate="header">
+                                                    <tr>
+                                                                    <th>Tag</th>
+                                                        <th>Actions</th>
+                                                    </tr>
+                                                </ng-template>
+                                                <ng-template pTemplate="body" let-p>
+                                                    <tr>
+                                                                <td>{{p.tagVo?.reference}}</td>
+                                                        <td>
+                                                            <button (click)="deleteDossierMedicaleTags(p)" pButton type="button"
+                                                                                                                 icon="pi pi-times"  class="p-button-rounded p-button-danger">
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                </ng-template>
+                                            </p-table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </p-tabPanel>
+
+                </p-tabView>
+
+            </ng-template>
+
+            <ng-template pTemplate="footer" >
+                <div class="p-grid">
+                        <div>
+                            <button pButton pRipple label="Annuler" icon="pi pi-times"
+                                    class="p-button-text" (click)="hideEditDialog()"></button>
+                        </div>
+                    <div>
+                        <button pButton pRipple label="Valider" icon="pi pi-check"  style="margin:10px" (click)="edit()"></button>
+                    </div>
+                </div>
+            </ng-template>
+
+                    <app-patient-create-etudiant></app-patient-create-etudiant>
+                    <app-patient-contact-create-etudiant></app-patient-contact-create-etudiant>
+                    <app-traitement-create-etudiant></app-traitement-create-etudiant>
+
+                            <app-examen-create-etudiant></app-examen-create-etudiant>
+                            <app-type-image-create-etudiant></app-type-image-create-etudiant>
+                            <app-phase-image-create-etudiant></app-phase-image-create-etudiant>
+                            <app-tag-create-etudiant></app-tag-create-etudiant>
+
+
+    </p-dialog>
+
+
+

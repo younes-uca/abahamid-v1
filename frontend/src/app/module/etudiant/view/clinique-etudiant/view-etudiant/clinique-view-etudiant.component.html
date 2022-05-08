@@ -1,0 +1,87 @@
+
+<p-dialog [(visible)]="viewCliniqueDialog" [style]="{width: '70vw'}"
+        header="Clinique" [modal]="true"
+        styleClass="p-fluid">
+
+    <ng-template pTemplate="content">
+        <p-tabView>
+            <p-tabPanel header="Clinique">
+                <div class="p-grid">
+
+                                <div class="p-field p-col-12 p-md-4">
+                                    <label for="1">Date clinique</label>
+                                    <p-calendar id="1" [disabled]="true"
+                                                placeholder="Date clinique"  [(ngModel)]="selectedClinique.dateClinique"
+                                            dateFormat="{{dateFormat}}"></p-calendar>
+                                </div>
+
+                                <div class="p-field p-col-12 p-md-4">
+                                    <label for="2">Antecedents personnels</label>
+                                    <textarea id="2" pInputTextarea rows="5" cols="30"
+                                              placeholder="Antecedents personnels"  [(ngModel)]="selectedClinique.antecedentsPersonnels"
+                                    ></textarea>
+                                </div>
+
+                                <div class="p-field p-col-12 p-md-4">
+                                    <label for="3">Antecedents familiaux</label>
+                                    <textarea id="3" pInputTextarea rows="5" cols="30"
+                                              placeholder="Antecedents familiaux"  [(ngModel)]="selectedClinique.antecedentsFamiliaux"
+                                    ></textarea>
+                                </div>
+
+                                <div class="p-field p-col-12 p-md-4">
+                                    <label for="4">Histoire maladie</label>
+                                    <textarea id="4" pInputTextarea rows="5" cols="30"
+                                              placeholder="Histoire maladie"  [(ngModel)]="selectedClinique.histoireMaladie"
+                                    ></textarea>
+                                </div>
+
+                                <div class="p-field p-col-12 p-md-4">
+                                    <label for="5">Examen clinique</label>
+                                    <textarea id="5" pInputTextarea rows="5" cols="30"
+                                              placeholder="Examen clinique"  [(ngModel)]="selectedClinique.examenClinique"
+                                    ></textarea>
+                                </div>
+
+                                <div class="p-field p-col-12 p-md-4">
+                                    <label for="6">Conclusion clinique</label>
+                                    <textarea id="6" pInputTextarea rows="5" cols="30"
+                                              placeholder="Conclusion clinique"  [(ngModel)]="selectedClinique.conclusionClinique"
+                                    ></textarea>
+                                </div>
+
+                                <div class="p-field p-col-12 p-md-4">
+                                    <label for="7">Dossier medicale</label>
+                                    <p-dropdown [options]="dossierMedicales" [(ngModel)]="selectedClinique.dossierMedicaleVo"
+                                            id="7" [filter]="true" filterMatchMode="contains"
+                                            [showClear]="true" [disabled]="true"
+                                            optionLabel="ref"
+                                            placeholder="Dossier medicale">
+                                    </p-dropdown>
+                                </div>
+
+
+                </div>
+            </p-tabPanel>
+
+        </p-tabView>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer" >
+        <div class="p-grid">
+            <div>
+                <button pButton pRipple label="Annuler" icon="pi pi-times"
+                        class="p-button-text" (click)="hideViewDialog()"></button>
+            </div>
+        </div>
+    </ng-template>
+
+            <app-dossier-medicale-create-etudiant></app-dossier-medicale-create-etudiant>
+
+
+
+</p-dialog>
+
+
+

@@ -1,0 +1,160 @@
+        <p-dialog [(visible)]="createTraitementDialog" [style]="{width: '70vw'}"
+                header="Traitement" [modal]="true"
+                styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
+
+
+            <ng-template pTemplate="content" >
+                <p-tabView>
+                    <p-tabPanel header="Traitement">
+                        <div class="p-grid">
+
+                                        <div class="p-field p-col-11 p-md-5">
+                                            <label for="1">Recueil de donnes<span style="color: red;">*</span></label>
+                                            <p-dropdown [options]="recueilDeDonness" [(ngModel)]="selectedTraitement.recueilDeDonnesVo"
+                                                    id="1" [filter]="true" filterMatchMode="contains"
+                                                    [showClear]="true"
+                                                    optionLabel="traitementRef"
+                                                    placeholder="Recueil de donnes" [ngClass]="{'ng-invalid ng-dirty' : !validTraitementRecueilDeDonnes}"  >
+                                            </p-dropdown>
+                                            <small class='p-error' *ngIf='!validTraitementRecueilDeDonnes'>RecueilDeDonnes est obligatoire.</small>
+                                        </div>
+                                        <div class="p-col-1">
+                                            <label></label>
+                                            <button pButton pRipple type="button"
+                                                    icon="pi pi-plus"   (click)="openCreaterecueilDeDonnes('recueilDeDonnes')"
+                                                    class="p-button-success one-colonne-btn-success-align"></button>
+                                        </div>
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <label for="3">Image ordonnance</label>
+                                            <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                   placeholder="Image ordonnance"
+                                                   id="3" [(ngModel)]="selectedTraitement.imageOrdonnance"
+                                                     />
+                                            
+                                        </div>
+
+
+
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <label for="4">Dossier medicale ref<span style="color: red;">*</span></label>
+                                            <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                   placeholder="Dossier medicale ref"
+                                                   id="4" [(ngModel)]="selectedTraitement.dossierMedicaleRef"
+                                                    [ngClass]="{'ng-invalid ng-dirty' : !validTraitementDossierMedicaleRef}"  />
+                                            <small class='p-error' *ngIf='!validTraitementDossierMedicaleRef'>DossierMedicaleRef est obligatoire.</small>
+                                        </div>
+
+
+
+                        </div>
+                    </p-tabPanel>
+                    <p-tabPanel header="Soins">
+                                   <p-tabView>
+                                    <p-tabPanel header="Création">
+                                <div class="p-grid">
+                                                 <div class="p-field p-col-12 p-md-4">
+                                                    <label for="1">Date soin<span style="color: red;">*</span></label>
+                                                    <p-calendar id="1"
+                                                                placeholder="Date soin"
+                                                            [(ngModel)]="selectedSoins.dateSoin"
+                                                            dateFormat="{{dateFormat}}" [showIcon]="true"  [ngClass]="{'ng-invalid ng-dirty' : !validSoinDateSoin}" ></p-calendar>
+                                                    <small class='p-error' *ngIf='!validSoinDateSoin'>DateSoin est obligatoire.</small>
+                                                </div>
+                                                    <div class="p-field p-col-11 p-md-3">
+                                                        <label>Infirmier<span style="color: red;">*</span></label>
+                                                        <p-dropdown [options]="infirmiers" [(ngModel)]="selectedSoins.infirmierVo"
+                                                                id="2"  [filter]="true"
+                                                                filterMatchMode="contains" [showClear]="true"
+                                                                optionLabel="ref"
+                                                                placeholder="Infirmier"  [ngClass]="{'ng-invalid ng-dirty' : !validSoinInfirmier}" 
+                                                        >
+                                                        </p-dropdown>
+                                                        <small class='p-error' *ngIf='!validSoinInfirmier'>Infirmier est obligatoire.</small>
+                                                    </div>
+                                                    <div class="p-col-1">
+                                                        <label></label>
+                                                        <button pButton pRipple type="button"
+                                                                icon="pi pi-plus"   (click)="openCreateinfirmier('infirmier')"
+                                                                class="p-button-success one-colonne-btn-success-align"></button>
+                                                    </div>
+
+                                                 <div class="p-field p-col-12 p-md-4">
+                                                    <label for="3">Soins prod<span style="color: red;">*</span></label>
+                                                    <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                           placeholder="Soins prod"
+                                                           id="3" [(ngModel)]="selectedSoins.soinsProd"
+                                                           autofocus  [ngClass]="{'ng-invalid ng-dirty' : !validSoinSoinsProd}"  >
+                                                    <small class='p-error' *ngIf='!validSoinSoinsProd'>SoinsProd est obligatoire.</small>
+                                                </div>
+                                                 <div class="p-field p-col-12 p-md-4">
+                                                    <label for="4">Consigne</label>
+                                                    <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                           placeholder="Consigne"
+                                                           id="4" [(ngModel)]="selectedSoins.consigne"
+                                                           autofocus   >
+                                                    
+                                                </div>
+                                          <div class="p-field p-col-12 p-md-1">
+                                              <button pButton pRipple type="button" icon="pi pi-plus" class="p-mt-4"
+                                                    label="OK" (click)="addSoins()">
+                                              </button>
+                                          </div>
+                                </div>
+                                </p-tabPanel>
+                                <p-tabPanel header="Liste">
+                                    <div class="card">
+                                        <p-table [value]="selectedTraitement.soinsVo" [scrollable]="true"
+                                                scrollHeight="200px">
+                                            <ng-template pTemplate="header">
+                                                <tr>
+                                                                <th>Date soin</th>
+                                                                <th>Infirmier</th>
+                                                                <th>Soins prod</th>
+                                                                <th>Consigne</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </ng-template>
+                                            <ng-template pTemplate="body" let-p>
+                                                <tr>
+                                                                <td>{{p.dateSoin | date: dateFormatColumn}}</td>
+
+                                                            <td>{{p.infirmierVo?.ref}}</td>
+                                                                <td>{{p.soinsProd}}</td>
+
+                                                                <td>{{p.consigne}}</td>
+
+                                                    <td>
+                                                        <button (click)="deleteSoins(p)" pButton type="button" icon="pi pi-times"  class="p-button-rounded p-button-danger">
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </ng-template>
+                                        </p-table>
+                                    </div>
+
+                                </p-tabPanel>
+                                </p-tabView>
+                            </p-tabPanel>
+
+
+                </p-tabView>
+
+            </ng-template>
+
+            <ng-template pTemplate="footer" >
+                <div class="p-grid">
+                        <div>
+                            <button pButton pRipple label="Annuler" icon="pi pi-times"
+                                    class="p-button-text" (click)="hideCreateDialog()"></button>
+                        </div>
+                    <div>
+                        <button pButton pRipple label="Valider" icon="pi pi-check" style="margin:10px" (click)="save()"></button>
+                    </div>
+                </div>
+            </ng-template>
+
+                    <app-recueil-de-donnes-create-etudiant></app-recueil-de-donnes-create-etudiant>
+
+                            <app-infirmier-create-etudiant></app-infirmier-create-etudiant>
+
+    </p-dialog>

@@ -1,0 +1,126 @@
+
+        <p-dialog [(visible)]="editRecueilDeDonnesDialog" [style]="{width: '70vw'}"
+                header="Recueil de donnes" [modal]="true"
+                styleClass="p-fluid">
+
+            <ng-template pTemplate="content">
+                <p-tabView>
+                    <p-tabPanel header="Recueil de donnes">
+                        <div class="p-grid">
+
+                                        <div class="p-field p-col-12 p-md-4">
+                                            <label for="1">Allergie</label>
+                                            <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                   placeholder="Allergie"
+                                                   id="1" [(ngModel)]="selectedRecueilDeDonnes.allergie"
+                                                   />
+                                        </div>
+
+
+
+                                        <div class="p-field p-col-12 p-md-4">
+                                            <label for="2">Etat psy</label>
+                                            <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                   placeholder="Etat psy"
+                                                   id="2" [(ngModel)]="selectedRecueilDeDonnes.etatPsy"
+                                                   />
+                                        </div>
+
+
+
+                                        <div class="p-field p-col-12 p-md-4">
+                                            <label for="3">Respiration</label>
+                                            <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                   placeholder="Respiration"
+                                                   id="3" [(ngModel)]="selectedRecueilDeDonnes.respiration"
+                                                   />
+                                        </div>
+
+
+
+                                        <div class="p-field p-col-12 p-md-4">
+                                            <label for="4">Alimentation</label>
+                                            <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                   placeholder="Alimentation"
+                                                   id="4" [(ngModel)]="selectedRecueilDeDonnes.alimentation"
+                                                   />
+                                        </div>
+
+
+
+                                        <div class="p-field p-col-12 p-md-4">
+                                            <label for="5">Mouvement</label>
+                                            <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                   placeholder="Mouvement"
+                                                   id="5" [(ngModel)]="selectedRecueilDeDonnes.mouvement"
+                                                   />
+                                        </div>
+
+
+
+                                        <div class="p-field p-col-12 p-md-4">
+                                            <label for="6">Sommeil</label>
+                                            <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                   placeholder="Sommeil"
+                                                   id="6" [(ngModel)]="selectedRecueilDeDonnes.sommeil"
+                                                   />
+                                        </div>
+
+
+
+                                        <div class="p-field p-col-12 p-md-4">
+                                            <label for="7">Regulation</label>
+                                            <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                   placeholder="Regulation"
+                                                   id="7" [(ngModel)]="selectedRecueilDeDonnes.regulation"
+                                                   />
+                                        </div>
+
+
+
+                                        <div class="p-field p-col-12 p-md-4">
+                                            <label for="8">Autre</label>
+                                            <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                   placeholder="Autre"
+                                                   id="8" [(ngModel)]="selectedRecueilDeDonnes.autre"
+                                                   />
+                                        </div>
+
+
+
+                                        <div class="p-field p-col-12 p-md-4">
+                                            <label for="9">Traitement ref</label>
+                                            <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                   placeholder="Traitement ref"
+                                                   id="9" [(ngModel)]="selectedRecueilDeDonnes.traitementRef"
+                                                   />
+                                        </div>
+
+
+
+                        </div>
+                    </p-tabPanel>
+
+                </p-tabView>
+
+            </ng-template>
+
+            <ng-template pTemplate="footer" >
+                <div class="p-grid">
+                        <div>
+                            <button pButton pRipple label="Annuler" icon="pi pi-times"
+                                    class="p-button-text" (click)="hideEditDialog()"></button>
+                        </div>
+                    <div>
+                        <button pButton pRipple label="Valider" icon="pi pi-check"  style="margin:10px" (click)="edit()"></button>
+                    </div>
+                </div>
+            </ng-template>
+
+
+
+
+    </p-dialog>
+
+
+

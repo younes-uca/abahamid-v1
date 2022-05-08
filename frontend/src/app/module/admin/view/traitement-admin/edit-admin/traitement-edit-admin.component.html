@@ -1,0 +1,160 @@
+
+        <p-dialog [(visible)]="editTraitementDialog" [style]="{width: '70vw'}"
+                header="Traitement" [modal]="true"
+                styleClass="p-fluid">
+
+            <ng-template pTemplate="content">
+                <p-tabView>
+                    <p-tabPanel header="Traitement">
+                        <div class="p-grid">
+
+                                        <div class="p-field p-col-12 p-md-5">
+                                            <label for="1">Recueil de donnes</label>
+                                            <p-dropdown [options]="recueilDeDonness" [(ngModel)]="selectedTraitement.recueilDeDonnesVo"
+                                                    id="1" [filter]="true" filterMatchMode="contains"
+                                                    [showClear]="true"
+                                                    optionLabel="traitementRef"
+                                                    placeholder="Recueil de donnes">
+                                            </p-dropdown>
+                                        </div>
+                                        <div class="p-field p-col-12 p-md-1">
+                                            <label></label>
+                                            <button pButton pRipple type="button"
+                                                    icon="pi pi-plus"   (click)="openCreaterecueilDeDonnes('recueilDeDonnes')"
+                                                    class="p-button-success one-colonne-btn-success-align"></button>
+                                        </div>
+
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <label for="3">Image ordonnance</label>
+                                            <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                   placeholder="Image ordonnance"
+                                                   id="3" [(ngModel)]="selectedTraitement.imageOrdonnance"
+                                                   />
+                                        </div>
+
+
+
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <label for="4">Dossier medicale ref</label>
+                                            <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                   placeholder="Dossier medicale ref"
+                                                   id="4" [(ngModel)]="selectedTraitement.dossierMedicaleRef"
+                                                   />
+                                        </div>
+
+
+
+                        </div>
+                    </p-tabPanel>
+                            <p-tabPanel header="Soins">
+                                <div class="p-grid">
+                                    <div class="p-col">
+                                                <div class="p-field">
+                                                    <label for="1">Date soin</label>
+                                                    <p-calendar id="1"
+                                                                placeholder="Date soin"
+                                                            [(ngModel)]="selectedSoins.dateSoin"
+                                                            dateFormat="{{dateFormat}}" [showIcon]="true"></p-calendar>
+                                                </div>
+                                                <div class="p-field">
+                                                    <label for="2">Soins prod</label>
+                                                    <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                           placeholder="Soins prod"
+                                                           id="2" [(ngModel)]="selectedSoins.soinsProd"
+                                                           />
+                                                </div>
+
+                                                <div class="p-field">
+                                                    <label for="3">Consigne</label>
+                                                    <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                           placeholder="Consigne"
+                                                           id="3" [(ngModel)]="selectedSoins.consigne"
+                                                           />
+                                                </div>
+
+                                                <div class="p-grid">
+                                                    <div class="p-col-11 p-field">
+                                                        <label>Infirmier</label>
+                                                        <p-dropdown [options]="infirmiers" [(ngModel)]="selectedSoins.infirmierVo"
+                                                                id="0"  [filter]="true"
+                                                                filterMatchMode="contains" [showClear]="true"
+                                                                optionLabel="ref"
+                                                                placeholder="Infirmier"
+                                                        >
+                                                        </p-dropdown>
+
+                                                    </div>
+                                                    <div class="p-col-1">
+                                                        <label></label>
+                                                        <button pButton pRipple type="button"
+                                                                icon="pi pi-plus"   (click)="openCreateinfirmier('infirmier')"
+                                                                class="p-button-success one-colonne-btn-success-align"></button>
+                                                    </div>
+
+                                                </div>
+
+                                        <button pButton pRipple type="button" icon="pi pi-plus" class="p-mt-4"
+                                                label="OK" (click)="addSoins()"
+                                        ></button>
+                                    </div>
+                                    <div class="p-col">
+                                        <div class="card">
+                                            <p-table [value]="selectedTraitement.soinsVo" [scrollable]="true"
+                                                    scrollHeight="200px">
+                                                <ng-template pTemplate="header">
+                                                    <tr>
+                                                                    <th>Date soin</th>
+                                                                    <th>Infirmier</th>
+                                                                    <th>Soins prod</th>
+                                                                    <th>Consigne</th>
+                                                        <th>Actions</th>
+                                                    </tr>
+                                                </ng-template>
+                                                <ng-template pTemplate="body" let-p>
+                                                    <tr>
+                                                                    <td>{{p.dateSoin | date: dateFormatColumn}}</td>
+
+                                                                <td>{{p.infirmierVo?.ref}}</td>
+                                                                    <td>{{p.soinsProd}}</td>
+
+                                                                    <td>{{p.consigne}}</td>
+
+                                                        <td>
+                                                            <button (click)="deleteSoins(p)" pButton type="button"
+                                                                                                                 icon="pi pi-times"  class="p-button-rounded p-button-danger">
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                </ng-template>
+                                            </p-table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </p-tabPanel>
+
+                </p-tabView>
+
+            </ng-template>
+
+            <ng-template pTemplate="footer" >
+                <div class="p-grid">
+                        <div>
+                            <button pButton pRipple label="Annuler" icon="pi pi-times"
+                                    class="p-button-text" (click)="hideEditDialog()"></button>
+                        </div>
+                    <div>
+                        <button pButton pRipple label="Valider" icon="pi pi-check"  style="margin:10px" (click)="edit()"></button>
+                    </div>
+                </div>
+            </ng-template>
+
+                    <app-recueil-de-donnes-create-admin></app-recueil-de-donnes-create-admin>
+
+                            <app-infirmier-create-admin></app-infirmier-create-admin>
+
+
+    </p-dialog>
+
+
+

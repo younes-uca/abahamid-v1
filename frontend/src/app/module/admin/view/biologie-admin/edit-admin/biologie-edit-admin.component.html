@@ -1,0 +1,87 @@
+
+        <p-dialog [(visible)]="editBiologieDialog" [style]="{width: '70vw'}"
+                header="Biologie" [modal]="true"
+                styleClass="p-fluid">
+
+            <ng-template pTemplate="content">
+                <p-tabView>
+                    <p-tabPanel header="Biologie">
+                        <div class="p-grid">
+
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <label for="1">Date biologie</label>
+                                            <p-calendar id="1"
+                                                        placeholder="Date biologie"  [(ngModel)]="selectedBiologie.dateBiologie"
+                                                    dateFormat="{{dateFormat}}"></p-calendar>
+                                        </div>
+
+                                        <div class="p-field p-col-12 p-md-5">
+                                            <label for="2">Examen</label>
+                                            <p-dropdown [options]="examens" [(ngModel)]="selectedBiologie.examenVo"
+                                                    id="2" [filter]="true" filterMatchMode="contains"
+                                                    [showClear]="true"
+                                                    optionLabel="libelle"
+                                                    placeholder="Examen">
+                                            </p-dropdown>
+                                        </div>
+                                        <div class="p-field p-col-12 p-md-1">
+                                            <label></label>
+                                            <button pButton pRipple type="button"
+                                                    icon="pi pi-plus"   (click)="openCreateexamen('examen')"
+                                                    class="p-button-success one-colonne-btn-success-align"></button>
+                                        </div>
+
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <label for="3">Resultat</label>
+                                            <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                   placeholder="Resultat"
+                                                   id="3" [(ngModel)]="selectedBiologie.resultat"
+                                                   />
+                                        </div>
+
+
+
+                                        <div class="p-field p-col-12 p-md-5">
+                                            <label for="4">Dossier medicale</label>
+                                            <p-dropdown [options]="dossierMedicales" [(ngModel)]="selectedBiologie.dossierMedicaleVo"
+                                                    id="4" [filter]="true" filterMatchMode="contains"
+                                                    [showClear]="true"
+                                                    optionLabel="ref"
+                                                    placeholder="Dossier medicale">
+                                            </p-dropdown>
+                                        </div>
+                                        <div class="p-field p-col-12 p-md-1">
+                                            <label></label>
+                                            <button pButton pRipple type="button"
+                                                    icon="pi pi-plus"   (click)="openCreatedossierMedicale('dossierMedicale')"
+                                                    class="p-button-success one-colonne-btn-success-align"></button>
+                                        </div>
+
+                        </div>
+                    </p-tabPanel>
+
+                </p-tabView>
+
+            </ng-template>
+
+            <ng-template pTemplate="footer" >
+                <div class="p-grid">
+                        <div>
+                            <button pButton pRipple label="Annuler" icon="pi pi-times"
+                                    class="p-button-text" (click)="hideEditDialog()"></button>
+                        </div>
+                    <div>
+                        <button pButton pRipple label="Valider" icon="pi pi-check"  style="margin:10px" (click)="edit()"></button>
+                    </div>
+                </div>
+            </ng-template>
+
+                    <app-examen-create-admin></app-examen-create-admin>
+                    <app-dossier-medicale-create-admin></app-dossier-medicale-create-admin>
+
+
+
+    </p-dialog>
+
+
+

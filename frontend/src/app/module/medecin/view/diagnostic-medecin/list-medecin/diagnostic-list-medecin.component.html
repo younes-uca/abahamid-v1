@@ -1,0 +1,146 @@
+<div class="p-grid">
+    <div class="p-col-12">
+        <p-toast></p-toast>
+        <div class="card">
+            <p-toolbar styleClass="p-mb-4">
+                <ng-template pTemplate="left">
+                                            <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2 p-mb-2"
+                                (click)="openCreateDiagnostic('diagnostic')"></button>
+
+
+                    <button pButton pRipple label="Recherche"
+                            icon="pi pi-{{findByCriteriaShow?'angle-down':'angle-right'}}"
+                            class="p-button-success p-mr-2 p-mb-2"
+                            (click)="this.findByCriteriaShow = !this.findByCriteriaShow"></button>
+                </ng-template>
+                <ng-template pTemplate="right">
+                    <div class="flex">
+                        <p-splitButton label="Exporter" icon="pi pi-download" styleClass="p-button-help" [model]="excelPdfButons"></p-splitButton>
+                    </div>
+                </ng-template>
+
+            </p-toolbar>
+            <p-toolbar *ngIf="findByCriteriaShow">
+
+                <div class="align-form-search">
+
+                        <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                            <p-calendar
+                                    class="p-mr-2" [(ngModel)]="searchDiagnostic.dateDiagnosticMin"
+                                    id="1-1"
+                                    dateFormat="dd-MM-yy"></p-calendar>
+                            <label for="1-1">Date diagnostic Min</label>
+                        </span>
+
+                         <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                            <p-calendar
+                                    class="p-mr-2" [(ngModel)]="searchDiagnostic.dateDiagnosticMax"
+                                    id="1-2"
+                                    dateFormat="dd-MM-yy"></p-calendar>
+                            <label for="1-2">Date diagnostic Max</label>
+                        </span>
+
+                            <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                <p-dropdown [options]="dossierMedicales" [(ngModel)]="searchDiagnostic.dossierMedicaleVo"
+                                        id="3"
+                                        [filter]="true" [showClear]="true"  placeholder="Dossier medicale"
+                                        optionLabel="ref">
+                                </p-dropdown>
+                            </span>
+                </div>
+
+                <div class="align-search-button">
+                    <button pButton pRipple label="Valider" icon="pi pi-sort-amount-down"
+                            class="p-button-info p-mr-2" (click)="searchRequest()"></button>
+                </div>
+            </p-toolbar>
+
+
+            <p-table #dt [value]="diagnostics" [columns]="cols" [rows]="4" [paginator]="true"
+                    [globalFilterFields]="['dateDiagnostic', 'ref']" [(selection)]="selectedDiagnostic"
+                    [rowHover]="true" dataKey="id" styleClass="p-datatable-customers"
+                                      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                    [showCurrentPageReport]="true">
+                <ng-template pTemplate="caption">
+                    <div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header">
+                        <h5 class="p-m-0">Liste des Diagnostics</h5>
+                        <span class="p-input-icon-left">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text" placeholder="Search..." (input)="dt.filterGlobal($event.target.value, 'contains')"/>
+                        </span>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 3rem">
+                            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                        </th>
+
+                                
+                                <th pSortableColumn="dateDiagnostic">
+                                    <div class="p-d-flex p-jc-between p-ai-center">
+                                        <span>Date diagnostic</span>
+                                        <p-sortIcon field="dateDiagnostic"></p-sortIcon>
+                                    </div>
+                                </th>
+                                
+
+
+
+                                
+                                <th pSortableColumn="dossierMedicale">
+                                    <div class="p-d-flex p-jc-between p-ai-center">
+                                        <span>Dossier medicale</span>
+                                        <p-sortIcon field="dossierMedicale"></p-sortIcon>
+                                    </div>
+                                </th>
+                                
+
+
+                        <th>Actions</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-diagnostic>
+                    <tr>
+                        <td>
+                            <p-tableCheckbox [value]="diagnostic"></p-tableCheckbox>
+                        </td>
+                            
+                                <td>{{diagnostic.dateDiagnostic | date:'dd-M-yyyy' }}</td>
+                            
+
+                            
+                                <td>{{diagnostic.dossierMedicaleVo?.ref}}</td>
+                            
+
+
+                        <td>
+                            <button pButton pRipple icon="pi pi-pencil"
+                                    class="p-button-rounded p-button-success p-mr-2"
+                                    (click)="editDiagnostic(diagnostic)"></button>
+                            <button pButton pRipple icon="pi pi-list" class="p-button-rounded p-button-info p-mr-2"
+                                    (click)="viewDiagnostic(diagnostic)"></button>
+                            <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger p-mr-2"
+                                    (click)="deleteDiagnostic(diagnostic)"></button>
+
+                            <button pButton pRipple icon="pi pi-copy" class="p-button-rounded p-button-raised p-button-warning"
+                                    (click)="duplicateDiagnostic(diagnostic)"></button>
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="summary">
+                    <div class="p-d-flex p-ai-center p-jc-between">
+                        En totale
+                        il {{diagnostics ? diagnostics.length == 1 ? 'y a' : 'y a' : 'y a' }} {{diagnostics ? diagnostics.length : 0 }} {{diagnostics ? diagnostics.length == 1 ? 'diagnostic' : 'diagnostics' : 0 }}
+                        .
+                    </div>
+                </ng-template>
+            </p-table>
+        </div>
+
+        <app-diagnostic-create-medecin></app-diagnostic-create-medecin>
+        <app-diagnostic-edit-medecin></app-diagnostic-edit-medecin>
+        <app-diagnostic-view-medecin></app-diagnostic-view-medecin>
+        <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+    </div>
+</div>

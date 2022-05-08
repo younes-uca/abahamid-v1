@@ -1,0 +1,98 @@
+        <p-dialog [(visible)]="createInfirmierDialog" [style]="{width: '70vw'}"
+                header="Infirmier" [modal]="true"
+                styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
+
+
+            <ng-template pTemplate="content" >
+                <p-tabView>
+                    <p-tabPanel header="Infirmier">
+                        <div class="p-grid">
+
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <label for="1">Ref<span style="color: red;">*</span></label>
+                                            <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                   placeholder="Ref"
+                                                   id="1" [(ngModel)]="selectedInfirmier.ref"
+                                                    [ngClass]="{'ng-invalid ng-dirty' : !validInfirmierRef}"  />
+                                            <small class='p-error' *ngIf='!validInfirmierRef'>Ref est obligatoire.</small>
+                                        </div>
+
+
+
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <label for="2">Nom<span style="color: red;">*</span></label>
+                                            <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                   placeholder="Nom"
+                                                   id="2" [(ngModel)]="selectedInfirmier.nom"
+                                                    [ngClass]="{'ng-invalid ng-dirty' : !validInfirmierNom}"  />
+                                            <small class='p-error' *ngIf='!validInfirmierNom'>Nom est obligatoire.</small>
+                                        </div>
+
+
+
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <label for="3">Prenom<span style="color: red;">*</span></label>
+                                            <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                   placeholder="Prenom"
+                                                   id="3" [(ngModel)]="selectedInfirmier.prenom"
+                                                    [ngClass]="{'ng-invalid ng-dirty' : !validInfirmierPrenom}"  />
+                                            <small class='p-error' *ngIf='!validInfirmierPrenom'>Prenom est obligatoire.</small>
+                                        </div>
+
+
+
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <label for="4">Sexe<span style="color: red;">*</span></label>
+                                            <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                   placeholder="Sexe"
+                                                   id="4" [(ngModel)]="selectedInfirmier.sexe"
+                                                    [ngClass]="{'ng-invalid ng-dirty' : !validInfirmierSexe}"  />
+                                            <small class='p-error' *ngIf='!validInfirmierSexe'>Sexe est obligatoire.</small>
+                                        </div>
+
+
+
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <label for="5">Telephone<span style="color: red;">*</span></label>
+                                            <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                   placeholder="Telephone"
+                                                   id="5" [(ngModel)]="selectedInfirmier.telephone"
+                                                    [ngClass]="{'ng-invalid ng-dirty' : !validInfirmierTelephone}"  />
+                                            <small class='p-error' *ngIf='!validInfirmierTelephone'>Telephone est obligatoire.</small>
+                                        </div>
+
+
+
+                                        <div class="p-field p-col-12 p-md-6">
+                                            <label for="6">Mail</label>
+                                            <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                   placeholder="Mail"
+                                                   id="6" [(ngModel)]="selectedInfirmier.mail"
+                                                     />
+                                            
+                                        </div>
+
+
+
+                        </div>
+                    </p-tabPanel>
+
+                </p-tabView>
+
+            </ng-template>
+
+            <ng-template pTemplate="footer" >
+                <div class="p-grid">
+                        <div>
+                            <button pButton pRipple label="Annuler" icon="pi pi-times"
+                                    class="p-button-text" (click)="hideCreateDialog()"></button>
+                        </div>
+                    <div>
+                        <button pButton pRipple label="Valider" icon="pi pi-check" style="margin:10px" (click)="save()"></button>
+                    </div>
+                </div>
+            </ng-template>
+
+
+
+    </p-dialog>

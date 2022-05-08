@@ -1,0 +1,204 @@
+<div class="p-grid">
+    <div class="p-col-12">
+        <p-toast></p-toast>
+        <div class="card">
+            <p-toolbar styleClass="p-mb-4">
+                <ng-template pTemplate="left">
+                                            <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2 p-mb-2"
+                                (click)="openCreateSoin('soin')"></button>
+
+
+                    <button pButton pRipple label="Recherche"
+                            icon="pi pi-{{findByCriteriaShow?'angle-down':'angle-right'}}"
+                            class="p-button-success p-mr-2 p-mb-2"
+                            (click)="this.findByCriteriaShow = !this.findByCriteriaShow"></button>
+                </ng-template>
+                <ng-template pTemplate="right">
+                    <div class="flex">
+                        <p-splitButton label="Exporter" icon="pi pi-download" styleClass="p-button-help" [model]="excelPdfButons"></p-splitButton>
+                    </div>
+                </ng-template>
+
+            </p-toolbar>
+            <p-toolbar *ngIf="findByCriteriaShow">
+
+                <div class="align-form-search">
+
+                        <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                            <p-calendar
+                                    class="p-mr-2" [(ngModel)]="searchSoin.dateSoinMin"
+                                    id="1-1"
+                                    dateFormat="dd-MM-yy"></p-calendar>
+                            <label for="1-1">Date soin Min</label>
+                        </span>
+
+                         <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                            <p-calendar
+                                    class="p-mr-2" [(ngModel)]="searchSoin.dateSoinMax"
+                                    id="1-2"
+                                    dateFormat="dd-MM-yy"></p-calendar>
+                            <label for="1-2">Date soin Max</label>
+                        </span>
+
+                            <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                <p-dropdown [options]="infirmiers" [(ngModel)]="searchSoin.infirmierVo"
+                                        id="2"
+                                        [filter]="true" [showClear]="true"  placeholder="Infirmier"
+                                        optionLabel="ref">
+                                </p-dropdown>
+                            </span>
+                                <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                    <input class="p-mr-2" pInputText id="3"
+                                           type="text"  [(ngModel)]="searchSoin.soinsProd">
+                                    <label for="3">Soins prod</label>
+                                </span>
+                                <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                    <input class="p-mr-2" pInputText id="4"
+                                           type="text"  [(ngModel)]="searchSoin.consigne">
+                                    <label for="4">Consigne</label>
+                                </span>
+                            <span class=" p-float-label p-mr-3 align-search-items p-mt-4">
+                                <p-dropdown [options]="traitements" [(ngModel)]="searchSoin.traitementVo"
+                                        id="5"
+                                        [filter]="true" [showClear]="true"  placeholder="Traitement"
+                                        optionLabel="dossierMedicaleRef">
+                                </p-dropdown>
+                            </span>
+                </div>
+
+                <div class="align-search-button">
+                    <button pButton pRipple label="Valider" icon="pi pi-sort-amount-down"
+                            class="p-button-info p-mr-2" (click)="searchRequest()"></button>
+                </div>
+            </p-toolbar>
+
+
+            <p-table #dt [value]="soins" [columns]="cols" [rows]="4" [paginator]="true"
+                    [globalFilterFields]="['dateSoin', 'ref', 'soinsProd', 'consigne', 'dossierMedicaleRef']" [(selection)]="selectedSoin"
+                    [rowHover]="true" dataKey="id" styleClass="p-datatable-customers"
+                                      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                    [showCurrentPageReport]="true">
+                <ng-template pTemplate="caption">
+                    <div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header">
+                        <h5 class="p-m-0">Liste des Soins</h5>
+                        <span class="p-input-icon-left">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text" placeholder="Search..." (input)="dt.filterGlobal($event.target.value, 'contains')"/>
+                        </span>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 3rem">
+                            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                        </th>
+
+                                
+                                <th pSortableColumn="dateSoin">
+                                    <div class="p-d-flex p-jc-between p-ai-center">
+                                        <span>Date soin</span>
+                                        <p-sortIcon field="dateSoin"></p-sortIcon>
+                                    </div>
+                                </th>
+                                
+
+
+                                
+                                <th pSortableColumn="infirmier">
+                                    <div class="p-d-flex p-jc-between p-ai-center">
+                                        <span>Infirmier</span>
+                                        <p-sortIcon field="infirmier"></p-sortIcon>
+                                    </div>
+                                </th>
+                                
+
+
+                                
+                                <th pSortableColumn="soinsProd">
+                                    <div class="p-d-flex p-jc-between p-ai-center">
+                                        <span>Soins prod</span>
+                                        <p-sortIcon field="soinsProd"></p-sortIcon>
+                                    </div>
+                                </th>
+                                
+
+
+                                
+                                <th pSortableColumn="consigne">
+                                    <div class="p-d-flex p-jc-between p-ai-center">
+                                        <span>Consigne</span>
+                                        <p-sortIcon field="consigne"></p-sortIcon>
+                                    </div>
+                                </th>
+                                
+
+
+                                
+                                <th pSortableColumn="traitement">
+                                    <div class="p-d-flex p-jc-between p-ai-center">
+                                        <span>Traitement</span>
+                                        <p-sortIcon field="traitement"></p-sortIcon>
+                                    </div>
+                                </th>
+                                
+
+
+                        <th>Actions</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-soin>
+                    <tr>
+                        <td>
+                            <p-tableCheckbox [value]="soin"></p-tableCheckbox>
+                        </td>
+                            
+                                <td>{{soin.dateSoin | date:'dd-M-yyyy' }}</td>
+                            
+
+                            
+                                <td>{{soin.infirmierVo?.ref}}</td>
+                            
+
+                            
+                                 <td>{{soin.soinsProd}}</td>
+                            
+
+                            
+                                 <td>{{soin.consigne}}</td>
+                            
+
+                            
+                                <td>{{soin.traitementVo?.dossierMedicaleRef}}</td>
+                            
+
+
+                        <td>
+                            <button pButton pRipple icon="pi pi-pencil"
+                                    class="p-button-rounded p-button-success p-mr-2"
+                                    (click)="editSoin(soin)"></button>
+                            <button pButton pRipple icon="pi pi-list" class="p-button-rounded p-button-info p-mr-2"
+                                    (click)="viewSoin(soin)"></button>
+                            <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger p-mr-2"
+                                    (click)="deleteSoin(soin)"></button>
+
+                            <button pButton pRipple icon="pi pi-copy" class="p-button-rounded p-button-raised p-button-warning"
+                                    (click)="duplicateSoin(soin)"></button>
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="summary">
+                    <div class="p-d-flex p-ai-center p-jc-between">
+                        En totale
+                        il {{soins ? soins.length == 1 ? 'y a' : 'y a' : 'y a' }} {{soins ? soins.length : 0 }} {{soins ? soins.length == 1 ? 'soin' : 'soins' : 0 }}
+                        .
+                    </div>
+                </ng-template>
+            </p-table>
+        </div>
+
+        <app-soin-create-medecin></app-soin-create-medecin>
+        <app-soin-edit-medecin></app-soin-edit-medecin>
+        <app-soin-view-medecin></app-soin-view-medecin>
+        <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+    </div>
+</div>

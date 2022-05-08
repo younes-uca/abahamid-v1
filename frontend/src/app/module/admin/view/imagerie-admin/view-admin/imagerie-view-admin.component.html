@@ -1,0 +1,93 @@
+
+<p-dialog [(visible)]="viewImagerieDialog" [style]="{width: '70vw'}"
+        header="Imagerie" [modal]="true"
+        styleClass="p-fluid">
+
+    <ng-template pTemplate="content">
+        <p-tabView>
+            <p-tabPanel header="Imagerie">
+                <div class="p-grid">
+
+                                <div class="p-field p-col-12 p-md-6">
+                                    <label for="1">Date imagerie</label>
+                                    <p-calendar id="1" [disabled]="true"
+                                                placeholder="Date imagerie"  [(ngModel)]="selectedImagerie.dateImagerie"
+                                            dateFormat="{{dateFormat}}"></p-calendar>
+                                </div>
+
+                                <div class="p-field p-col-12 p-md-6">
+                                    <label for="2">Type image</label>
+                                    <p-dropdown [options]="typeImages" [(ngModel)]="selectedImagerie.typeImageVo"
+                                            id="2" [filter]="true" filterMatchMode="contains"
+                                            [showClear]="true" [disabled]="true"
+                                            optionLabel="libelle"
+                                            placeholder="Type image">
+                                    </p-dropdown>
+                                </div>
+
+
+                                <div class="p-field p-col-12 p-md-6">
+                                    <label for="3">Phase image</label>
+                                    <p-dropdown [options]="phaseImages" [(ngModel)]="selectedImagerie.phaseImageVo"
+                                            id="3" [filter]="true" filterMatchMode="contains"
+                                            [showClear]="true" [disabled]="true"
+                                            optionLabel="libelle"
+                                            placeholder="Phase image">
+                                    </p-dropdown>
+                                </div>
+
+
+                                <div class="p-field p-col-12 p-md-6">
+                                    <label for="4">Image scan</label>
+                                    <input class="p-mb-2 p-mr-2" type="text" pInputText [disabled]="true"
+                                           placeholder="Image scan"  [(ngModel)]="selectedImagerie.imageScan"
+                                           id="4" [(ngModel)]="selectedImagerie.imageScan"
+                                           autofocus>
+                                </div>
+
+
+
+                                <div class="p-field p-col-12 p-md-6">
+                                    <label for="5">Commanetaire</label>
+                                    <textarea id="5" pInputTextarea rows="5" cols="30"
+                                              placeholder="Commanetaire"  [(ngModel)]="selectedImagerie.commanetaire"
+                                    ></textarea>
+                                </div>
+
+                                <div class="p-field p-col-12 p-md-6">
+                                    <label for="6">Dossier medicale</label>
+                                    <p-dropdown [options]="dossierMedicales" [(ngModel)]="selectedImagerie.dossierMedicaleVo"
+                                            id="6" [filter]="true" filterMatchMode="contains"
+                                            [showClear]="true" [disabled]="true"
+                                            optionLabel="ref"
+                                            placeholder="Dossier medicale">
+                                    </p-dropdown>
+                                </div>
+
+
+                </div>
+            </p-tabPanel>
+
+        </p-tabView>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer" >
+        <div class="p-grid">
+            <div>
+                <button pButton pRipple label="Annuler" icon="pi pi-times"
+                        class="p-button-text" (click)="hideViewDialog()"></button>
+            </div>
+        </div>
+    </ng-template>
+
+            <app-type-image-create-admin></app-type-image-create-admin>
+            <app-phase-image-create-admin></app-phase-image-create-admin>
+            <app-dossier-medicale-create-admin></app-dossier-medicale-create-admin>
+
+
+
+</p-dialog>
+
+
+

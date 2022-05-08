@@ -1,0 +1,115 @@
+        <p-dialog [(visible)]="createPatientContactDialog" [style]="{width: '70vw'}"
+                header="Patient contact" [modal]="true"
+                styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
+
+
+            <ng-template pTemplate="content" >
+                <p-tabView>
+                    <p-tabPanel header="Patient contact">
+                        <div class="p-grid">
+
+                                        <div class="p-field p-col-12 p-md-4">
+                                            <label for="1">Ref<span style="color: red;">*</span></label>
+                                            <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                   placeholder="Ref"
+                                                   id="1" [(ngModel)]="selectedPatientContact.ref"
+                                                    [ngClass]="{'ng-invalid ng-dirty' : !validPatientContactRef}"  />
+                                            <small class='p-error' *ngIf='!validPatientContactRef'>Ref est obligatoire.</small>
+                                        </div>
+
+
+
+                                        <div class="p-field p-col-12 p-md-4">
+                                            <label for="2">Nom<span style="color: red;">*</span></label>
+                                            <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                   placeholder="Nom"
+                                                   id="2" [(ngModel)]="selectedPatientContact.nom"
+                                                    [ngClass]="{'ng-invalid ng-dirty' : !validPatientContactNom}"  />
+                                            <small class='p-error' *ngIf='!validPatientContactNom'>Nom est obligatoire.</small>
+                                        </div>
+
+
+
+                                        <div class="p-field p-col-12 p-md-4">
+                                            <label for="3">Prenom<span style="color: red;">*</span></label>
+                                            <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                   placeholder="Prenom"
+                                                   id="3" [(ngModel)]="selectedPatientContact.prenom"
+                                                    [ngClass]="{'ng-invalid ng-dirty' : !validPatientContactPrenom}"  />
+                                            <small class='p-error' *ngIf='!validPatientContactPrenom'>Prenom est obligatoire.</small>
+                                        </div>
+
+
+
+                                        <div class="p-field p-col-11 p-md-3">
+                                            <label for="4">Relation<span style="color: red;">*</span></label>
+                                            <p-dropdown [options]="relations" [(ngModel)]="selectedPatientContact.relationVo"
+                                                    id="4" [filter]="true" filterMatchMode="contains"
+                                                    [showClear]="true"
+                                                    optionLabel="libelle"
+                                                    placeholder="Relation" [ngClass]="{'ng-invalid ng-dirty' : !validPatientContactRelation}"  >
+                                            </p-dropdown>
+                                            <small class='p-error' *ngIf='!validPatientContactRelation'>Relation est obligatoire.</small>
+                                        </div>
+                                        <div class="p-col-1">
+                                            <label></label>
+                                            <button pButton pRipple type="button"
+                                                    icon="pi pi-plus"   (click)="openCreaterelation('relation')"
+                                                    class="p-button-success one-colonne-btn-success-align"></button>
+                                        </div>
+                                        <div class="p-field p-col-12 p-md-4">
+                                            <label for="5">Adresse</label>
+                                            <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                   placeholder="Adresse"
+                                                   id="5" [(ngModel)]="selectedPatientContact.adresse"
+                                                     />
+                                            
+                                        </div>
+
+
+
+                                        <div class="p-field p-col-12 p-md-4">
+                                            <label for="6">Telephone<span style="color: red;">*</span></label>
+                                            <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                   placeholder="Telephone"
+                                                   id="6" [(ngModel)]="selectedPatientContact.telephone"
+                                                    [ngClass]="{'ng-invalid ng-dirty' : !validPatientContactTelephone}"  />
+                                            <small class='p-error' *ngIf='!validPatientContactTelephone'>Telephone est obligatoire.</small>
+                                        </div>
+
+
+
+                                        <div class="p-field p-col-12 p-md-4">
+                                            <label for="7">Mail</label>
+                                            <input class="p-mb-2 p-mr-2" type="text" pInputText
+                                                   placeholder="Mail"
+                                                   id="7" [(ngModel)]="selectedPatientContact.mail"
+                                                     />
+                                            
+                                        </div>
+
+
+
+                        </div>
+                    </p-tabPanel>
+
+                </p-tabView>
+
+            </ng-template>
+
+            <ng-template pTemplate="footer" >
+                <div class="p-grid">
+                        <div>
+                            <button pButton pRipple label="Annuler" icon="pi pi-times"
+                                    class="p-button-text" (click)="hideCreateDialog()"></button>
+                        </div>
+                    <div>
+                        <button pButton pRipple label="Valider" icon="pi pi-check" style="margin:10px" (click)="save()"></button>
+                    </div>
+                </div>
+            </ng-template>
+
+                    <app-relation-create-etudiant></app-relation-create-etudiant>
+
+
+    </p-dialog>
