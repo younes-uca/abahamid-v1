@@ -109,12 +109,6 @@ import { PhaseImageAdminComponent } from './view/phase-image-admin/phase-image-a
                         },
                         {
 
-                            path: 'archivable',
-                            loadChildren: './view/archivable/archivable-routing.module#ArchivableRoutingModule',
-                            canActivate: [AuthGuard],
-                        },
-                        {
-
                             path: 'biologie',
                             children: [
                                 {

@@ -18,7 +18,7 @@ import {PanelModule} from 'primeng/panel';
 import {InputNumberModule} from 'primeng/inputnumber';
 import {BadgeModule} from 'primeng/badge';
 import { MultiSelectModule } from 'primeng/multiselect';
-import { ArchivableEtudiantModule } from './view/archivable/archivable.module';
+
 
 
 import { BiologieCreateEtudiantComponent } from './view/biologie-etudiant/create-etudiant/biologie-create-etudiant.component';
@@ -302,8 +302,7 @@ import {MessagesModule} from 'primeng/messages';
     MessagesModule,
     InputNumberModule,
     BadgeModule,
-    MultiSelectModule,
-    ArchivableEtudiantModule
+    MultiSelectModule
   ],
   exports: [
   LoginEtudiantComponent,

@@ -18,7 +18,7 @@ import {PanelModule} from 'primeng/panel';
 import {InputNumberModule} from 'primeng/inputnumber';
 import {BadgeModule} from 'primeng/badge';
 import { MultiSelectModule } from 'primeng/multiselect';
-import { ArchivableMedecinModule } from './view/archivable/archivable.module';
+
 
 
 import { BiologieCreateMedecinComponent } from './view/biologie-medecin/create-medecin/biologie-create-medecin.component';
@@ -302,8 +302,7 @@ import {MessagesModule} from 'primeng/messages';
     MessagesModule,
     InputNumberModule,
     BadgeModule,
-    MultiSelectModule,
-    ArchivableMedecinModule
+    MultiSelectModule
   ],
   exports: [
   LoginMedecinComponent,

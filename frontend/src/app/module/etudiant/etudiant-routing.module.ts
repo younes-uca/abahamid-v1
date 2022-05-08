@@ -109,12 +109,6 @@ import { PhaseImageEtudiantComponent } from './view/phase-image-etudiant/phase-i
                         },
                         {
 
-                            path: 'archivable',
-                            loadChildren: './view/archivable/archivable-routing.module#ArchivableRoutingModule',
-                            canActivate: [AuthGuard],
-                        },
-                        {
-
                             path: 'biologie',
                             children: [
                                 {

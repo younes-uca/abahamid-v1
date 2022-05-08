@@ -18,7 +18,7 @@ import {PanelModule} from 'primeng/panel';
 import {InputNumberModule} from 'primeng/inputnumber';
 import {BadgeModule} from 'primeng/badge';
 import { MultiSelectModule } from 'primeng/multiselect';
-import { ArchivableChercheurModule } from './view/archivable/archivable.module';
+
 
 
 import { BiologieCreateChercheurComponent } from './view/biologie-chercheur/create-chercheur/biologie-create-chercheur.component';
@@ -302,8 +302,7 @@ import {MessagesModule} from 'primeng/messages';
     MessagesModule,
     InputNumberModule,
     BadgeModule,
-    MultiSelectModule,
-    ArchivableChercheurModule
+    MultiSelectModule
   ],
   exports: [
   LoginChercheurComponent,

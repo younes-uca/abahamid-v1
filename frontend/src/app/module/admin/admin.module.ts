@@ -18,7 +18,6 @@ import {PanelModule} from 'primeng/panel';
 import {InputNumberModule} from 'primeng/inputnumber';
 import {BadgeModule} from 'primeng/badge';
 import { MultiSelectModule } from 'primeng/multiselect';
-import { ArchivableAdminModule } from './view/archivable/archivable.module';
 
 
 import { BiologieCreateAdminComponent } from './view/biologie-admin/create-admin/biologie-create-admin.component';
@@ -304,8 +303,7 @@ import {SwitchChercheurAdminComponent} from './view/switch_chercheur/switch-cher
     MessagesModule,
     InputNumberModule,
     BadgeModule,
-    MultiSelectModule,
-    ArchivableAdminModule
+    MultiSelectModule
   ],
   exports: [
   LoginAdminComponent,

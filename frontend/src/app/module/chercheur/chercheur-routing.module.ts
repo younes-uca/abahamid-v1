@@ -109,12 +109,6 @@ import { PhaseImageChercheurComponent } from './view/phase-image-chercheur/phase
                         },
                         {
 
-                            path: 'archivable',
-                            loadChildren: './view/archivable/archivable-routing.module#ArchivableRoutingModule',
-                            canActivate: [AuthGuard],
-                        },
-                        {
-
                             path: 'biologie',
                             children: [
                                 {
